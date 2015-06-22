@@ -5,7 +5,7 @@ var express = require('express'),
     methodOverride = require("method-override"),
     session = require("cookie-session"),
     morgan = require("morgan")
-    // loginMiddleware = require("./middleware/loginHelper");
+    loginMiddleware = require("./middleware/loginHelper");
     // routeMiddleware = require("./middleware/routeHelper");
 
 app.set('view engine', 'ejs');
@@ -17,12 +17,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(session({
   maxAge: 3600000,
   secret: 'secret',
-  name: "reddit chip"
+  name: "league chip"
 }));
 
 
 // use loginMiddleware everywhere!
-// app.use(loginMiddleware);
+app.use(loginMiddleware);
 
 //******************* Home ****************************
 
@@ -45,11 +45,27 @@ app.post("/signup", function(req, res) {
 
 //******************* Login ****************************
 
+//TODO - add a separate login page to redirect to if they log in incorrectly
 
+app.post("/login", function(req, res) {
+  var user = req.body.user;
+  db.User.authenticate(user, function(err, user) {
+    if(!err && user !== null) {
+      req.login(user);
+      res.redirect("/teams");
+    } else {
+      console.log(err);
+      res.redirect("/")
+    }
+  })
+})
 
 //******************* Logout ****************************
 
-
+app.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+})
 
 //******************* Teams ****************************
 
@@ -63,6 +79,10 @@ app.get("/teams", function(req, res) {
 })
 
 //New
+
+app.get("/teams/new", function(req, res) {
+  res.render("teams/new");
+})
 
 //Show
 
