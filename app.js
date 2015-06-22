@@ -88,6 +88,19 @@ app.get("/teams/new", function(req, res) {
 
 //Create
 
+app.post("/teams", function(req, res) {
+  db.Team.create(req.body.team, function(err, team) {
+    if(err) console.log(err);
+    team.owner = req.session.id;
+    team.save();
+    db.User.findById(req.session.id, function(err, user) {
+      user.teams.push(team);
+      user.save();
+      res.redirect("/teams/" + team._id + "/players/new")
+    })
+  })
+})
+
 //Edit
 
 //Update
@@ -96,7 +109,23 @@ app.get("/teams/new", function(req, res) {
 
 //******************* Players ****************************
 
+//Index
 
+//New
+
+app.get("/teams/:id/players/new", function(req, res) {
+  res.render("players/new")
+})
+
+//Show
+
+//Create
+
+//Edit
+
+//Update
+
+//Delete
 
 
 

@@ -1,5 +1,28 @@
 <% include ../partials/header %>
 
+<div id="top-new">
+	<h1>Add a new team to The League!</h1>
+	<h3>It's simple! Just add the name and an image to get started.</h3>
+</div>
+
+<div id="main-new">
+	<form action="/teams" method="POST">
+		<div>
+			<label for="name">Team Name:</label>
+				<input type="text" name="team[name]" id="name">
+		</div>
+
+		<div>
+			<label for="image">Image Url:</label>
+				<input type="text" name="team[imageUrl]" id="image">
+		</div>
+
+		<input type="submit" value="Add team">
+	</form>
+
+</div>
+
+<form action="/logout"><input type="submit" value="Logout"></form>
 
 
 
