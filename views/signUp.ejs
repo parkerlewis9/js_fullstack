@@ -1,0 +1,33 @@
+<% include ./partials/header %>
+
+<div id="topbar-home">
+		
+	<div id="loginbox">
+		<h1>Welcome to The League</h1>
+
+	</div>
+
+</div>
+
+
+
+<div id="maindiv-signup">
+	
+	<div id="centered-signup">
+	<!-- 	<div id="signup-text">
+			<h4>Enter your new username and password:</h4>
+		</div> -->
+		<img src="https://www.middletownschools.org/uploaded/Board_of_Education/BOE_Committees/signup_now.jpg" alt="Sign UP">
+		<form action="/signup" method="POST">
+			<label for="username"></label>
+			<input type="text" name="user[username]" id="username" autofocus placeholder="Username">
+			<label for="password"></label>
+			<input type="text" name="user[password]" id="password" placeholder="Password">
+			<input type="submit" value="Sign Up">
+		</form>	
+
+	</div>
+
+</div>
+
+<% include ./partials/footer %>

@@ -30,6 +30,19 @@ app.get("/", function(req, res) {
   res.render("home")
 })
 
+//******************* Sign Up ****************************
+
+app.get("/signup", function(req, res) {
+  res.render("signUp")
+})
+
+app.post("/signup", function(req, res) {
+  db.User.create(req.body.user, function(err, user) {
+    if (err) console.log(err);
+    res.redirect("/teams")
+  })
+})
+
 //******************* Login ****************************
 
 
@@ -40,7 +53,26 @@ app.get("/", function(req, res) {
 
 //******************* Teams ****************************
 
+//Index
+app.get("/teams", function(req, res) {
+  db.Team.find({})
+    .populate("owner")
+    .exec(function(err, teams) {
+      res.render("teams/index", {teams: teams})
+    })
+})
 
+//New
+
+//Show
+
+//Create
+
+//Edit
+
+//Update
+
+//Destroy
 
 //******************* Players ****************************
 

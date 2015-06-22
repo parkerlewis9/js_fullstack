@@ -1,0 +1,70 @@
+/*Stylesheet for basketball app*/
+
+body {
+	background-color: rgba(79, 110, 196, .2);
+	 
+}
+
+/*Home Page*/
+
+#topbar-home {
+	border: 2px solid black;
+	width: 100%;
+	height: 150px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: right;
+}
+
+#loginbox {
+	text-align: right;
+/*	align-self: flex-end;*/
+}
+
+#loginbox p {
+	text-align: center;
+}
+
+#loginbox h4 {
+	text-align: center;
+}
+
+#maindiv-home {
+	border: 2px solid red;
+	width: 100%;
+	height: 500px;
+	display: flex;
+	align-items: center;;
+	justify-content: center;
+}
+
+#centered-home {
+	border: 2px solid green;
+	width: 85%;
+	height: 75%;
+}
+
+/*Sign up Page*/
+
+#maindiv-signup {
+	border: 2px solid red;
+	width: 100%;
+	height: 500px;
+	display: flex;
+	align-items: center;;
+	justify-content: center;
+}
+
+#centered-signup {
+	border: 2px solid green;
+	width: 85%;
+	height: 75%;
+	display: flex;
+	align-items: center;;
+	justify-content: center;
+}
+
+#centered-signup img {
+	margin: 10px;
+}
