@@ -1,23 +1,23 @@
 var mongoose = require("mongoose");
 
 var teamSchema = new mongoose.Schema({
-					name: {
-						type: String,
-						required: true
-					},
-					imageUrl: {
-						type: String,
-						required: true
-					},
-					owner: {
-                      type: mongoose.Schema.Types.ObjectId,
-                      ref: "User"
-                    },
+			name: {
+				type: String,
+				required: true
+			},
+			imageUrl: {
+				type: String,
+				required: true
+			},
+			owner: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: "User"
+            },
 
-    				players: [{
-        				type: mongoose.Schema.Types.ObjectId,
-        				ref: "Player"
-    				}],
+			players: [{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Player"
+			}],
 })
 
 

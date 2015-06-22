@@ -6,23 +6,23 @@ var mongoose = require("mongoose");
 
 var userSchema = new mongoose.Schema({
 
-	username: {
-		type: String,
-		unique: true,
-		required: true
-	},
-	password: {
-		type: String,
-		required: true
-	},
-	teams: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Team"
-    }],
-    players: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Player"
-    }]
+		username: {
+			type: String,
+			unique: true,
+			required: true
+		},
+		password: {
+			type: String,
+			required: true
+		},
+		teams: [{
+	        type: mongoose.Schema.Types.ObjectId,
+	        ref: "Team"
+	    }],
+	    players: [{
+	        type: mongoose.Schema.Types.ObjectId,
+	        ref: "Player"
+	    }]
 })
 
 //Before a user is made, make the password a hash:
