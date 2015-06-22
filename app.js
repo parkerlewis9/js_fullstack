@@ -114,7 +114,10 @@ app.post("/teams", function(req, res) {
 //New
 
 app.get("/teams/:id/players/new", function(req, res) {
-  res.render("players/new")
+  db.Team.findById(req.params.id, function(err, team) {
+    res.render("players/new", {team: team})    
+  })
+
 })
 
 //Show

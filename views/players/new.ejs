@@ -1,4 +1,29 @@
 <% include ../partials/playersNewHeader %>
 
-<h1>Add Players to _____</h1>
+<div id="playersnew-header">
+	<h1>Add Players to <%= team.name %></h1>
+</div>
+
+<div id="playersnew-wrapper">
+	
+	<div id="playersnew-one">
+		
+		<form action="/teams" id="player1-form">
+			<label for="player1">Enter a Players Name:</label>
+			<p>Be sure to spell their first and last name correctly! <a href="http://www.google.com">Google</a></p>
+				<input type="text" name="player1" id="player1">
+			<input type="submit" value="Find Player">
+		</form>
+
+
+	</div>
+
+
+
+
+</div>
+
+
+
+
 <% include ../partials/footer %>

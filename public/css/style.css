@@ -89,6 +89,26 @@ body {
 }
 
 
+/*New page for players*/
+
+#playersnew-header {
+	text-align: center;
+}
+
+#playersnew-wrapper {
+	display: flex;
+	align-items: center;;
+	justify-content: center;
+	border: 2px solid black;
+	width: 100%;
+}
+
+#playersnew-one {
+	height: 600px;
+	width: 65%;
+	border:2px solid black;
+	text-align: center;
+}
 
 
 
