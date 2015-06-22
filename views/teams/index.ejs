@@ -2,10 +2,32 @@
 
 <div id="maindiv-teams">
 	<h1>The League</h1>
+	<form action="/teams/new"><input type="submit" value="Add a New Team to the League"></form>
 	<h2>Check out your competition below:</h2>
 
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Team Logo</th>
+					<th>Team Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% teams.forEach(function(team) { %>
+					<tr>
+						<td><img src="<%= team.imageUrl %>" alt="Team Logo" height=100 width=100></td>
+						<td><%= team.name %></td>
+					</tr>
+					<%	})%>	
+
+
+			</tbody>
+
+
+
+		</table>
 	
-	<form action="/teams/new"><input type="submit" value="Add a New Team to the League"></form>
+
 
 </div>
 

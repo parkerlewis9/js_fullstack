@@ -73,8 +73,14 @@ body {
 
 #maindiv-teams {
 	width: 100%;
+	margin: 5% 0%;
 	border: 2px solid black;
 	text-align: center
+}
+
+#maindiv-teams td {
+	text-align: left;
+	font-size: 30px
 }
 
 
