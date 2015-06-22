@@ -104,12 +104,15 @@ body {
 }
 
 #playersnew-one {
-	height: 600px;
+	/*height: 600px;*/
 	width: 65%;
 	border:2px solid black;
 	text-align: center;
 }
 
+#hiddenstatsplayer1 {
+	display: none;
+}
 
 
 

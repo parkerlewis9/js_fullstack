@@ -53,12 +53,34 @@ var stats;
 		var firstName = $("#player1first").val();
 		var lastName = $("#player1last").val();
 		lookUpPlayerStats(firstName, lastName, function(stats) {
-			$("#pointsplayer1").html(stats.points)
-			$("#blocksplayer1").html(stats.blocks)
-			$("#assistsplayer1").html(stats.assists)
-			$("#reboundsplayer1").html(stats.rebounds)
-			$("#stealsplayer1").html(stats.steals)
-			$("#scoreplayer1").html(stats.score)
+			// var picUrl = 
+			$.ajax({
+					url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + firstName + "+" + lastName + "+" + "espn",
+					jsonp: "callback",
+					dataType: "jsonp"
+				}).done(function(data) {
+				console.log(data.responseData.results[0].unescapedUrl);
+				var imgUrl = data.responseData.results[0].unescapedUrl;
+				$("#urlplayer1").attr("src", imgUrl)
+				//Add stats to page
+				$("#pointsplayer1").html(stats.points)
+				$("#blocksplayer1").html(stats.blocks)
+				$("#assistsplayer1").html(stats.assists)
+				$("#reboundsplayer1").html(stats.rebounds)
+				$("#stealsplayer1").html(stats.steals)
+				$("#scoreplayer1").html(stats.score)
+				//Add name to page
+				$("#nameplayer1").html(firstName + " " + lastName)
+				//Show the div slowly
+				$("#hiddenstatsplayer1").fadeIn("slow", function() {
+					//Remove values from textboxes
+					$("#player1first").val("");
+					$("#player1last").val("");
+					//Refocus
+					$("#player1first").focus();
+				})
+			})
+
 		})
 			
 		
