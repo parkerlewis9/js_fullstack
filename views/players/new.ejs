@@ -34,7 +34,7 @@
 
 			<form action="/teams/<%= team.id %>/players" id="addplayer1">
 				<input type="submit" value="Add player to your team">
-				<input type="hidden" name="teamid" value="<%= team.id %>">
+				<input type="hidden" name="teamid" id= "teamid" value="<%= team.id %>">
 
 				<input type="hidden" id="player1name" name="player[name]" value="">
 				<input type="hidden" id="player1points" name="player[points]" value="">
@@ -48,6 +48,10 @@
 
 
 
+
+		</div>
+		<div id="successfuladd">
+			<p>The player was added to your team. Add again or see your team <a href="teams/<%= team.id %>">here</a></p>
 
 		</div>
 

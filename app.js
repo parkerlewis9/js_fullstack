@@ -124,6 +124,40 @@ app.get("/teams/:id/players/new", function(req, res) {
 
 //Create
 
+app.post("/teams/:id/players", function(req, res) {
+  console.log(req.body)
+  db.Player.create(req.body, function(err, player) {
+    if(err) console.log(err)
+    player.owner = req.session.id;
+    player.team = req.params.id;
+    player.save();
+    db.Team.findById(req.params.id, function(err, team) {
+      if(err) console.log(err);
+      team.players.push(player);
+      team.save();
+      db.User.findById(req.session.id, function(err, user) {
+        if(err) console.log(err);
+        user.players.push(player);
+        user.save()
+        res.format({
+          'text/html': function(){
+            //this may be horribly wrong should check over
+            res.render("/teams/show", {team: team});
+          },
+
+          'application/json': function(){
+            res.send({ player: player });
+          },
+          'default': function() {
+            // log the request and respond with 406
+            res.status(406).send('Not Acceptable');
+          }
+        });
+      })
+    })
+  })
+})
+
 //Edit
 
 //Update
