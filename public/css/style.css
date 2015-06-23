@@ -94,6 +94,12 @@ body {
 	text-align: center;
 }
 
+#newplayer-teamsnew #playersnew-one {
+	text-align: center;
+	width: 100%;
+	display: none;
+}
+
 
 /*New page for players*/
 
