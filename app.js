@@ -90,7 +90,6 @@ app.get("/teams/:id", function(req, res) {
   db.Team.findById(req.params.id)
     .populate("players")
     .exec(function(err, team) {
-      console.log(team)
       res.render("teams/show", {team: team})
     })
 })
@@ -98,7 +97,6 @@ app.get("/teams/:id", function(req, res) {
 //Create
 
 app.post("/teams", function(req, res) {
-  console.log(req.body)
   db.Team.create(req.body, function(err, team) {
     if(err) console.log(err);
     team.owner = req.session.id;
@@ -205,7 +203,16 @@ app.post("/teams/:id/players", function(req, res) {
 
 //Update
 
-//Delete
+//Destroy
+
+app.delete("/players/:id", function(req, res) {
+  db.Player.findByIdAndRemove(req.params.id)
+    .populate("team")
+    .exec(function(err, player) {
+      if(err) console.log(err);
+      res.redirect("/teams/" + player.team._id)
+    })
+})
 
 
 

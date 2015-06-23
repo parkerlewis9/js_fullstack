@@ -18,7 +18,12 @@
 					<tr>
 						<td><img src="<%= player.imageUrl %>" alt="Photo of <%= player.name %>" height=200 width=250></td>
 						<td><%= player.name %></td>
-						<td class="optional">Delete</td>
+						<td class="optional">
+							<form action="/players/<%= player._id %>?_method=DELETE" method="POST">
+								<input type="submit" value="Delete">
+							</form>
+
+						</td>
 					</tr>
 					<%	})%>
 			</tbody>
