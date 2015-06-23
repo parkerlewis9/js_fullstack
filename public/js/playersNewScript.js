@@ -1,6 +1,7 @@
 $(document).ready(function() {
 var stats;
 
+//TODO --- Make one function to search for results  √
 
 	function lookUpPlayerStats(firstName, lastName, callback) {
 		$("#errorMsg").html("")
@@ -61,14 +62,31 @@ var stats;
 				}).done(function(data) {
 				console.log(data.responseData.results[0].unescapedUrl);
 				var imgUrl = data.responseData.results[0].unescapedUrl;
+				//Add image to page
 				$("#urlplayer1").attr("src", imgUrl)
+				$("#player1image").attr("value", imgUrl)
+
 				//Add stats to page
 				$("#pointsplayer1").html(stats.points)
+				$("#player1points").attr("value", stats.points)
+
 				$("#blocksplayer1").html(stats.blocks)
+				$("#player1blocks").attr("value", stats.blocks)
+
 				$("#assistsplayer1").html(stats.assists)
+				$("#player1assists").attr("value", stats.assists)
+
 				$("#reboundsplayer1").html(stats.rebounds)
+				$("#player1rebounds").attr("value", stats.rebounds);
+
 				$("#stealsplayer1").html(stats.steals)
+				$("#player1steals").attr("value", stats.steals)
+
 				$("#scoreplayer1").html(stats.score)
+				$("#player1score").attr("value", stats.score)
+
+				$("#player1name").attr("value", firstName + " " + lastName)
+
 				//Add name to page
 				$("#nameplayer1").html(firstName + " " + lastName)
 				//Show the div slowly
@@ -87,7 +105,62 @@ var stats;
 
 	})
 
-	//TODO --- Make one function to search for results  √
+
+	$("#addplayer1").on("submit", function(e) {
+		e.preventDefault();
+ 		var name = $("#nameplayer1").html();
+ 		var arrName = name.split();
+ 		lookUpPlayerStats(arrName[0], arrName[0], function(stats) {
+ 			$.ajax({
+ 					url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + firstName + "+" + lastName + "+" + "espn",
+ 					jsonp: "callback",
+ 					dataType: "jsonp"
+ 				}).done(function(data) {
+ 				console.log(data.responseData.results[0].unescapedUrl);
+ 				var imgUrl = data.responseData.results[0].unescapedUrl;
+ 				//Add image to page
+ 				$("#urlplayer1").attr("src", imgUrl)
+ 				$("#player1image").attr("value", imgUrl)
+
+ 				//Add stats to page
+ 				$("#pointsplayer1").html(stats.points)
+ 				$("#player1points").attr("value", stats.points)
+
+ 				$("#blocksplayer1").html(stats.blocks)
+ 				$("#player1blocks").attr("value", stats.blocks)
+
+ 				$("#assistsplayer1").html(stats.assists)
+ 				$("#player1assists").attr("value", stats.assists)
+
+ 				$("#reboundsplayer1").html(stats.rebounds)
+ 				$("#player1rebounds").attr("value", stats.rebounds);
+
+ 				$("#stealsplayer1").html(stats.steals)
+ 				$("#player1steals").attr("value", stats.steals)
+
+ 				$("#scoreplayer1").html(stats.score)
+ 				$("#player1score").attr("value", stats.score)
+
+ 				$("#player1name").attr("value", firstName + " " + lastName)
+
+ 				//Add name to page
+ 				$("#nameplayer1").html(firstName + " " + lastName)
+ 				//Show the div slowly
+ 				$("#hiddenstatsplayer1").fadeIn("slow", function() {
+ 					//Remove values from textboxes
+ 					$("#player1first").val("");
+ 					$("#player1last").val("");
+ 					//Refocus
+ 					$("#player1first").focus();
+ 				})
+ 			})
+
+ 		})
+
+
+
+	})
+
 
 })
 

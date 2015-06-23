@@ -3,42 +3,42 @@ var mongoose = require("mongoose");
 var playerSchema = new mongoose.Schema({
 						name: {
 							type: String,
-							required: true
+							// required: true
 						},
 
             score: {
-              type: Number,
-              required: true
+              type: String,
+              // required: true
             },
 
             points: {
-              type: Number,
-              required: true
+              type: String,
+              // required: true
             },
 
             steals: {
-              type: Number,
-              required: true
+              type: String,
+              // required: true
             },
 
             rebounds: {
-              type: Number,
-              required: true
+              type: String,
+              // required: true
             },
 
             blocks: {
-              type: Number,
-              required: true
+              type: String,
+              // required: true
             },
 
             assists: {
-              type: Number,
-              required: true
+              type: String,
+              // required: true
             },
 
             imageUrl: {
               type: String,
-              required: true
+              // required: true
             },
 
 						owner: {
