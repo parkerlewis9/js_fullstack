@@ -89,14 +89,29 @@ app.get("/teams/new", function(req, res) {
 //Create
 
 app.post("/teams", function(req, res) {
-  db.Team.create(req.body.team, function(err, team) {
+  console.log(req.body)
+  db.Team.create(req.body, function(err, team) {
     if(err) console.log(err);
     team.owner = req.session.id;
     team.save();
     db.User.findById(req.session.id, function(err, user) {
       user.teams.push(team);
       user.save();
-      res.redirect("/teams/" + team._id + "/players/new")
+      res.format({
+        'text/html': function(){
+          //this may be horribly wrong should check over
+          res.redirect("/teams/" + team._id + "/players")
+        },
+
+        'application/json': function(){
+          res.send({ team: team });
+        },
+        'default': function() {
+          // log the request and respond with 406
+          res.status(406).send('Not Acceptable');
+        }
+      });
+      
     })
   })
 })

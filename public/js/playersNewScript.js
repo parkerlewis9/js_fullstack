@@ -128,11 +128,35 @@ var stats;
  					})
  				})
  			})
-
  		})
+	})
 
-
-
+	$("#newteamform").on("submit", function(e) {
+		e.preventDefault();
+		var teamName = $("#name").val();
+		var teamUrl = $("#image").val();
+		var teamData = {};
+		teamData.name = teamName;
+		teamData.imageUrl = teamUrl;
+		$.ajax({
+		  type: "POST",
+		  url: "/teams",
+		  data: teamData,
+		  dataType: "json"
+		}).done(function(data) {
+			$("#name").val("");
+			$("#image").val("");
+			$("#main-new").fadeOut("slow", function() {
+				$("#playersnew-one").fadeIn("slow", function() {
+					$("#directions").html("Great! Now start adding players.");
+					$("#addplayer1").attr("action", "/teams/"+ data.team._id + "/players");
+					$("#teamid").attr("value", data.team._id);
+					$("#successfuladd a").attr("href", "teams/" + data.team._id)
+					console.log(data)
+				});
+			})
+			
+		})
 	})
 
 
