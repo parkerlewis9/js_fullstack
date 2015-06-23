@@ -1,9 +1,27 @@
 <% include ../partials/header %>
 
+<div id="topbar-index">
+		
+	<div id="insidetopbar-index">
+
+		<div id="navagate-index">
+			<a href="/">Home</a>
+		</div>
+		<!-- <p>Welcome to The League</p> -->
+		<h1>The League</h1>
+		<form action="/teams/new"><input type="submit" value="Add a New Team to the League"></form>
+		<h3>Check out your competition:</h3>
+
+
+	</div>
+
+	
+
+
+</div>
+
 <div id="maindiv-teams">
-	<h1>The League</h1>
-	<form action="/teams/new"><input type="submit" value="Add a New Team to the League"></form>
-	<h2>Check out your competition below:</h2>
+
 
 		<table class="table table-hover">
 			<thead>
@@ -15,7 +33,7 @@
 			<tbody>
 				<% teams.forEach(function(team) { %>
 					<tr>
-						<td><img src="<%= team.imageUrl %>" alt="Team Logo" height=100 width=100></td>
+						<td><img src="<%= team.imageUrl %>" alt="Team Logo" height=100 width=150></td>
 						<td><a href="/teams/<%= team.id %>"><%= team.name %></a></td>
 					</tr>
 					<%	})%>	

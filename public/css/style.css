@@ -130,19 +130,69 @@ body {
 	font-size: 50px
 }
 
+#navigate-signup {
+	margin-left: 10px;
+	align-self: flex-end;
+}
+
+
 /*Index of teams page*/
 
 #maindiv-teams {
 	width: 100%;
-	margin: 5% 0%;
 	border: 2px solid black;
 	text-align: center
 }
 
 #maindiv-teams td {
 	text-align: left;
-	font-size: 30px
+	font-size: 30px;
+	background-color: rgb(49, 88, 171);
 }
+
+#maindiv-teams th {
+	color: black;
+	border: 1px solid black;
+	background-color: rgb(49, 88, 171);
+}
+
+#topbar-index {
+	border: 2px solid black;
+	width: 100%;
+	height: 175px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: right;
+	color: black;
+}
+
+#insidetopbar-index {
+	text-align: center;
+	border: 2px solid black;
+/*	align-self: flex-end;*/
+}
+
+#insidetopbar-index form input {
+	background-color: white;
+}
+
+#insidetopbar-index h1 {
+	padding-top: -10px;
+	padding-right: 45px;
+	padding-left: 45px;
+	font-size: 50px;
+	text-align: center;
+
+/*	align-self: flex-end;*/
+}
+
+#navagate-index {
+	padding-top: 10px;
+}
+
+
+
 
 
 /*New page for teams*/
@@ -188,6 +238,9 @@ body {
 	display: none;
 }
 
+
+
+
 /*Teams Show Page*/
 
 #teamsshow-main h1 {
@@ -196,10 +249,54 @@ body {
 
 #teamsshow-main h2 {
 	margin-left: 10%;
+	margin-top: 0px;
+	color: black;
 }
 
 #teamsshow-main form.optional {
 	text-align: center;
+}
+
+
+#topbar-show {
+	border: 2px solid black;
+	width: 100%;
+	height: 175px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: right;
+	color: black;
+}
+
+#insidetopbar-show {
+	text-align: center;
+	border: 2px solid black;
+	background-color: rgb(49, 88, 171);
+
+/*	align-self: flex-end;*/
+}
+
+#insidetopbar-show form input {
+	background-color: white;
+}
+
+#insidetopbar-show h1 {
+	background-color: rgb(49, 88, 171);
+}
+
+#insidetopbar-show h1 {
+	padding-top: -10px;
+	padding-right: 45px;
+	padding-left: 45px;
+	font-size: 50px;
+	text-align: center;
+/*	align-self: flex-end;*/
+}
+
+#navagate-show {
+	background-color: rgb(49, 88, 171);
+	padding-top: 10px;
 }
 
 #rosterdiv {
@@ -207,14 +304,19 @@ body {
 	width: 100%;
 }
 
-/*#rosterdiv table {
-	margin-left: 10%;
-	margin-right: 10%
-}*/
-
-.optional {
-	/*display: none;*/
+#rosterdiv form {
+	background-color: rgb(49, 88, 171);
+}
+#rosterdiv form input {
+	background-color: white;
 }
 
+#rosterdiv table {
+	color: black;
+}
 
+#rosterdiv td {
+	background-color: rgb(49, 88, 171);
+	font-size: 20px
+}
 

@@ -90,7 +90,8 @@ app.get("/teams/:id", function(req, res) {
   db.Team.findById(req.params.id)
     .populate("players")
     .exec(function(err, team) {
-      res.render("teams/show", {team: team})
+      console.log(team)
+      res.render("teams/show", {team: team, isLoggedIn: req.session.id})
     })
 })
 
