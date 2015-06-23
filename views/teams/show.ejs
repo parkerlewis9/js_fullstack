@@ -6,7 +6,7 @@
 	<div id="insidetopbar-show">
 
 		<div id="navagate-show">
-			<a href="/">Home</a>
+			<a href="/teams">To All Teams</a>
 		</div>
 		<h1><%= team.name %></h1>
 
@@ -35,7 +35,7 @@
 					<tr>
 
 						<td><img src="<%= player.imageUrl %>" alt="Photo of <%= player.name %>" height=200 width=250></td>
-						<td><%= player.name %></td>
+						<td><a href="/players/<%= player.id %>"><%= player.name %></a></td>
 						
 						<% if (isLoggedIn == team.owner) {%>
 							<td class="optional">

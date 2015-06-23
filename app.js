@@ -164,6 +164,15 @@ app.get("/teams/:id/players/new", function(req, res) {
 
 //Show
 
+app.get("/players/:id", function(req, res) {
+  db.Player.findById(req.params.id)
+    .populate("team")
+    .exec(function(err, player) {
+      if(err) console.log(err);
+      res.render("players/show", {player: player})
+    })
+})
+
 //Create
 
 app.post("/teams/:id/players", function(req, res) {

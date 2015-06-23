@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+
+<div id="topbar-playershow">
+		
+	<div id="insidetopbar-playershow">
+
+		<div id="navagate-playershow">
+			<a href="/teams/<%= player.team._id %>">Back to <%= player.team.name %></a>
+		</div>
+		<!-- <p>Welcome to The League</p> -->
+		<h1><%= player.name %></h1>
+		<img src="<%= player.team.imageUrl %>" alt="Team Logo" height=200 width=250>
+
+
+	</div>
+
+</div>
+
+
+<% include ../partials/footer %>
