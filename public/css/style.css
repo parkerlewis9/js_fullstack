@@ -127,5 +127,33 @@ body {
 	display: none;
 }
 
+/*Teams Show Page*/
+
+#teamsshow-main h1 {
+	text-align: center;
+}
+
+#teamsshow-main h2 {
+	margin-left: 10%;
+}
+
+#teamsshow-main form.optional {
+	text-align: center;
+}
+
+#rosterdiv {
+	border: 2px solid black;
+	width: 100%;
+}
+
+/*#rosterdiv table {
+	margin-left: 10%;
+	margin-right: 10%
+}*/
+
+.optional {
+	/*display: none;*/
+}
+
 
 

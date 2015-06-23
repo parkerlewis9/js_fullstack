@@ -52,6 +52,7 @@ var stats;
 //Event listener for one player look up
 	$("#player1-form").on("submit", function(e) {
 		e.preventDefault();
+		$("#successfuladd").hide()
 		var firstName = $("#player1first").val();
 		var lastName = $("#player1last").val();
 		lookUpPlayerStats(firstName, lastName, function(stats) {
@@ -97,11 +98,12 @@ var stats;
 
 	})
 
-
+//When actually adding a player to a team
 	$("#addplayer1").on("submit", function(e) {
 		e.preventDefault();
  		var name = $("#nameplayer1").html();
  		var arrName = name.split(" ");
+ 	//Look up their stats and imgUrl again
  		lookUpPlayerStats(arrName[0], arrName[1], function(stats) {
  			$.ajax({
  					url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + arrName[0] + "+" + arrName[1] + "+" + "espn",
@@ -113,9 +115,9 @@ var stats;
  				var teamId = $("#teamid").attr("value")
  				var player = stats;
  				player.name = name;
- 				player.imgUrl = imgUrl;
+ 				player.imageUrl = imgUrl;
  				console.log(player)
-
+ 		//Actually create the player via a post
  				$.ajax({
  				  type: "POST",
  				  url: "/teams/" + teamId + "/players",
@@ -131,13 +133,16 @@ var stats;
  		})
 	})
 
+//When creating a team
 	$("#newteamform").on("submit", function(e) {
 		e.preventDefault();
+	//Get name and url and put them in object to send out
 		var teamName = $("#name").val();
 		var teamUrl = $("#image").val();
 		var teamData = {};
 		teamData.name = teamName;
 		teamData.imageUrl = teamUrl;
+	//Create the player
 		$.ajax({
 		  type: "POST",
 		  url: "/teams",
@@ -148,11 +153,12 @@ var stats;
 			$("#image").val("");
 			$("#main-new").fadeOut("slow", function() {
 				$("#playersnew-one").fadeIn("slow", function() {
+				//Add the teams info to the places that are required for making a player
 					$("#directions").html("Great! Now start adding players.");
 					$("#addplayer1").attr("action", "/teams/"+ data.team._id + "/players");
 					$("#teamid").attr("value", data.team._id);
-					$("#successfuladd a").attr("href", "teams/" + data.team._id)
-					console.log(data)
+					$("#successfuladd a").attr("href", "/teams/" + data.team._id);
+					$("#gototeam a").attr("href", "/teams/" + data.team._id);
 				});
 			})
 			

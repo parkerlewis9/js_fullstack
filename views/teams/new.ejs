@@ -51,19 +51,19 @@
 			<h4>Blocks: <span id="blocksplayer1"></span></h4>
 			<h2>Score: <span id="scoreplayer1"></span></h2>
 
-	<!-- Need to fix this form action and hidden input value (add the /id part from client js after first ajax post) -->
+	<!-- √ Need to fix this form action and hidden input value (add the /id part from client js after first ajax post) --> 
 			<form action="/teams/:id/players" id="addplayer1">
 				<input type="submit" value="Add player to your team">
 				<input type="hidden" name="teamid" id= "teamid" value=":id">
 			</form>
-
+			<p id="gototeam" >Add this player or see your team <a href="/teams/:id">here</a></p>
 
 
 
 		</div>
 		<div id="successfuladd">
-	<!-- And here with the team thing -->
-			<p>The player was added to your team. Add again or see your team <a href="teams/:id">here</a></p>
+	<!-- √ And here with the team thing -->
+			<p>The player was added to your team. Add again or see your team <a href="/teams/:id">here</a></p>
 
 		</div>
 

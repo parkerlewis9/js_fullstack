@@ -86,6 +86,15 @@ app.get("/teams/new", function(req, res) {
 
 //Show
 
+app.get("/teams/:id", function(req, res) {
+  db.Team.findById(req.params.id)
+    .populate("players")
+    .exec(function(err, team) {
+      console.log(team)
+      res.render("teams/show", {team: team})
+    })
+})
+
 //Create
 
 app.post("/teams", function(req, res) {
@@ -121,6 +130,12 @@ app.post("/teams", function(req, res) {
 //Update
 
 //Destroy
+
+app.delete("/teams/:id", function(req, res) {
+  db.Team.findByIdAndRemove(req.params.id, function(err, team) {
+    res.redirect("/teams");
+  })
+})
 
 //******************* Players ****************************
 

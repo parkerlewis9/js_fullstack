@@ -16,7 +16,7 @@
 				<% teams.forEach(function(team) { %>
 					<tr>
 						<td><img src="<%= team.imageUrl %>" alt="Team Logo" height=100 width=100></td>
-						<td><%= team.name %></td>
+						<td><a href="/teams/<%= team.id %>"><%= team.name %></a></td>
 					</tr>
 					<%	})%>	
 
