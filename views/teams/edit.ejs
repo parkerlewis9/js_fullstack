@@ -1,7 +1,19 @@
-<% include ./partials/header %>
+<% include ../partials/header %>
+
+<div id="teamedit-main">
+	<h1>Change <%= team.name %>'s Name or Logo</h1>
+
+	<form action="/teams/<%= team._id %>?_method=PUT" method="POST">
+		<label for="name">Team Name:</label>
+		<input type="text" name="team[name]" id="name" value="<%= team.name %>">
+		<label for="image">Team Logo URL:</label>
+		<input type="text" name="team[imageUrl]" id="image" value="<%= team.imageUrl %>">
+		<input type="submit" value="Edit">
+	</form>
+
+
+</div>
 
 
 
-
-
-<% include ./partials/footer %>
+<% include ../partials/footer %>

@@ -25,6 +25,11 @@
 		</table>
 		<form class="optional" action="/teams/<%= team._id %>?_method=DELETE" method="POST">
 			<input type="submit" value="Delete <%= team.name %>">
+			<input id="hiddenid" type="hidden" name="" value="<%= team._id %>">
+		</form>
+
+		<form class="optional" action="/teams/<%= team._id %>/edit">
+			<input type="submit" value="Edit <%= team.name %>">
 		</form>
 	</div>
 </div>

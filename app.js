@@ -127,11 +127,24 @@ app.post("/teams", function(req, res) {
 
 //Edit
 
+app.get("/teams/:id/edit", function(req, res) {
+  db.Team.findById(req.params.id, function(err, team) {
+    res.render("teams/edit", {team: team})
+  })
+})
+
 //Update
+
+app.put("/teams/:id", function(req, res) {
+  db.Team.findByIdAndUpdate(req.params.id, req.body.team, function(err, team) {
+    res.redirect("/teams/" + req.params.id)
+  })
+})
 
 //Destroy
 
 app.delete("/teams/:id", function(req, res) {
+  if(err) console.log(err)
   db.Team.findByIdAndRemove(req.params.id, function(err, team) {
     res.redirect("/teams");
   })
