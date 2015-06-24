@@ -17,13 +17,48 @@
 
 <!-- Left Column -->
 	<div class="col-md-4 col-md-offset-2 column" id="leftcolumn-newplayer">
+
 		<form action="/teams" id="formleft-newplayer">
 			<label for="labelleft-newplayer">Enter a First and Last Name:</label>
 			<p>Be sure to spell their first and last name correctly! <a href="http://www.google.com">Google</a></p>
-				<input type="text" name="firstnameinputleft-newplayer" class="nameinput" id="firstnameinput-newplayer" autofocus placeholder="First Name">
-				<input type="text" name="lastnameinputright-newplayer" class="nameinput" id="lastnameinputright-newplayer" placeholder="Last Name">
-			<input type="submit" class="nameinput" value="Find Player">
+				<input type="text" name="firstnameinputleft-newplayer" class="input" id="firstnameinputleft-newplayer" autofocus placeholder="First Name">
+				<input type="text" name="lastnameinputleft-newplayer" class="input" id="lastnameinputleft-newplayer" placeholder="Last Name">
+			<input type="submit" class="input" value="Find Player">
 		</form>
+
+
+<!-- Hidden Stats Left -->
+
+		<div id="hiddenstatsleft-newplayer" >
+
+			<div id="picturedivleft-newplayer">
+				<img src="" alt="Player Photo" id="urlplayerleft" class="backgroundleft" height=200 width=250>
+
+			</div>
+
+			<h2 id="nameplayerleft" class="backgroundleft"></h2>
+			<h3>Stats:</h3>
+			<h4>Points: <span id="pointsplayerleft" class="backgroundleft"></span></h4>
+			<h4>Assists: <span id="assistsplayerleft" class="backgroundleft"></span></h4>
+			<h4>Rebounds: <span id="reboundsplayerleft" class="backgroundleft"></span></h4>
+			<h4>Steals: <span id="stealsplayerleft" class="backgroundleft"></span></h4>
+			<h4>Blocks: <span id="blocksplayerleft" class="backgroundleft"></span></h4>
+			<h2>Score: <span id="scoreplayerleft" class="backgroundleft"></span></h2>
+
+			<form action="/teams/<%= team.id %>/players" id="addplayerleft">
+				<input type="submit" class="input" value="Add player to your team">
+				<input type="hidden" name="teamid" id= "teamid" value="<%= team.id %>">
+			</form>
+
+			<div id="successfuladdleft">
+				<p>The player was added to your team. Add again or see your team <a href="teams/<%= team.id %>">here</a></p>
+
+			</div>
+
+
+		</div>
+
+
 	</div>
 
 
@@ -32,10 +67,12 @@
 		<form action="/teams" id="formright-newplayer">
 			<label for="labelright-newplayer">Enter a First and Last Name:</label>
 			<p>Be sure to spell their first and last name correctly! <a href="http://www.google.com">Google</a></p>
-				<input type="text" name="firstnameinputright-newplayer" class="nameinput" id="firstnameinput-newplayer" autofocus placeholder="First Name">
-				<input type="text" name="lastnameinputright-newplayer" class="nameinput" id="lastnameinputright-newplayer" placeholder="Last Name">
-			<input type="submit" class="nameinput" value="Find Player">
+				<input type="text" name="firstnameinputright-newplayer" class="input" id="firstnameinput-newplayer" autofocus placeholder="First Name">
+				<input type="text" name="lastnameinputright-newplayer" class="input" id="lastnameinputright-newplayer" placeholder="Last Name">
+			<input type="submit" class="input" value="Find Player">
 		</form>
+<!-- Hidden Stats Right -->
+
 		
 	</div>
 	
