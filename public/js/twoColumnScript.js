@@ -41,7 +41,7 @@ $(document).ready(function() {
 	//If not: 	
 		  } else {
 		  	console.log("hello")
-		  	$("#formleft-newplayer").append('<p id="errorMsg">Please try again. Check your spelling. (If it is correct we may not have that player on file.)</p>');
+		  	$("#form" + side + "-newplayer").append('<p id="errorMsg">Please try again. Check your spelling. (If it is correct we may not have that player on file.)</p>');
 		  }
 		});
 	}
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 
 
-	//Left Column
+//Left Column
 	//Event listener for one player look up
 		$("#formleft-newplayer").on("submit", function(e) {
 			e.preventDefault();
@@ -100,6 +100,66 @@ $(document).ready(function() {
 			
 
 		})
+
+
+
+
+
+
+
+
+//Right Column
+//Event listener for one player look up
+	$("#formright-newplayer").on("submit", function(e) {
+		e.preventDefault();
+		$("#successfuladdright").hide()
+		var firstName = $("#firstnameinputright-newplayer").val();
+		var lastName = $("#lastnameinputright-newplayer").val();
+		console.log(firstName)
+		console.log(lastName)
+		lookUpPlayerStats(firstName, lastName, "right", function(stats) {
+			console.log("hello")
+			$.ajax({
+					url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + firstName + "+" + lastName + "+" + "espn",
+					jsonp: "callback",
+					dataType: "jsonp"
+				}).done(function(data) {
+				var imgUrl = data.responseData.results[0].unescapedUrl;
+
+				//Add image to page
+				$("#urlplayerright").attr("src", imgUrl)
+
+				//Add stats to page
+				$("#pointsplayerright").html(stats.points)
+
+				$("#blocksplayerright").html(stats.blocks)
+
+				$("#assistsplayerright").html(stats.assists)
+
+				$("#reboundsplayerright").html(stats.rebounds)
+
+				$("#stealsplayerright").html(stats.steals)
+
+				$("#scoreplayerright").html(stats.score)
+
+				//Add name to page
+				$("#nameplayerright").html(firstName + " " + lastName)
+				//Show the div slowly
+				$("#hiddenstatsright-newplayer").fadeIn("slow", function() {
+					//Remove values from textboxes
+					$("#firstnameinputright-newplayer").val("");
+					$("#lastnameinputright-newplayer").val("");
+					//Refocus
+					$("#firstnameinputright-newplayer").focus();
+				})
+			})
+
+		})
+			
+		
+
+	})
+
 
 })
 

@@ -561,11 +561,14 @@ body {
 
 #picturedivleft-newplayer {
 	margin-top: 25px;
+	background-color: white;
 }
 
 #picturedivright-newplayer {
 	margin-top: 25px;
 	background-color: white;
+
+	
 }
 #hiddenstatsleft-newplayer {
 	display: none;
@@ -585,6 +588,33 @@ body {
 }
 
 .backgroundleft {
+	background-color: white;
+
+}
+
+#picturedivright-newplayer {
+	margin-top: 25px;
+}
+
+
+#hiddenstatsright-newplayer {
+	display: none;
+	background-color: white;
+}
+
+#hiddenstatsright-newplayer h3 {
+	background-color: white;
+}
+
+#hiddenstatsright-newplayer h2 {
+	background-color: white;
+}
+
+#hiddenstatsright-newplayer h4 {
+	background-color: white;
+}
+
+.backgroundright {
 	background-color: white;
 
 }
