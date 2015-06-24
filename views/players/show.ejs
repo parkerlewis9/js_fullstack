@@ -1,12 +1,18 @@
 <% include ../partials/header %>
 
+<div id="navagate-playershow">
+	<a href="/teams/<%= player.team._id %>"><%= player.team.name %></a>
+	<a href="/teams">The Leauge</a>
+	<% if(isLoggedIn) { %>
+		<a href="/logout">Logout</a>
+	<% } %>
+</div>
+
 <div id="topbar-playershow">
 		
 	<div id="insidetopbar-playershow">
 
-		<div id="navagate-playershow">
-			<a href="/teams/<%= player.team._id %>">Back to <%= player.team.name %></a>
-		</div>
+
 		<h1><%= player.name %></h1>
 		
 	</div>

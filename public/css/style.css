@@ -130,9 +130,14 @@ body {
 	font-size: 50px
 }
 
-#navigate-signup {
+#navagate-signup {
+	padding-top: 10px;
+	background-color: rgb(49, 88, 171);
+	
+}
+
+#navagate-signup a {
 	margin-left: 10px;
-	align-self: flex-end;
 }
 
 
@@ -168,12 +173,26 @@ body {
 	justify-content: center;
 	text-align: right;
 	color: black;
+
 }
 
 #insidetopbar-index {
 	text-align: center;
 	border: 2px solid black;
 /*	align-self: flex-end;*/
+	background-color: rgb(49, 88, 171);
+}
+
+#insidetopbar-index h3 {
+	background-color: rgb(49, 88, 171);
+}
+
+#insidetopbar-index h1 {
+	background-color: rgb(49, 88, 171);	
+}
+
+#insidetopbar-index form {
+	background-color: rgb(49, 88, 171);	
 }
 
 #insidetopbar-index form input {
@@ -192,6 +211,11 @@ body {
 
 #navagate-index {
 	padding-top: 10px;
+	background-color: rgb(49, 88, 171);
+}
+
+#navagate-index a {
+	margin-left: 10px;
 }
 
 
@@ -230,6 +254,10 @@ body {
 #navagate-newteam {
 	background-color: rgb(49, 88, 171);
 	padding-top: 10px;
+}
+
+#navagate-newteam a {
+	margin-left: 10px;
 }
 
 #directions {
@@ -352,7 +380,6 @@ body {
 	border: 2px solid black;
 	background-color: rgb(49, 88, 171);
 
-/*	align-self: flex-end;*/
 }
 
 #insidetopbar-show form input {
@@ -377,6 +404,10 @@ body {
 	padding-top: 10px;
 }
 
+#navagate-show a{
+	margin-left: 10px;
+}
+
 #rosterdiv {
 	border: 2px solid black;
 	width: 100%;
@@ -397,6 +428,11 @@ body {
 #rosterdiv td {
 	background-color: rgb(49, 88, 171);
 	font-size: 20px
+}
+
+#rosterdiv th {
+	background-color: rgb(49, 88, 171);
+	border: 2px solid black;
 }
 
 
@@ -490,11 +526,15 @@ body {
 	padding-top: 10px;
 }
 
+#navagate-playershow a {
+	margin-left: 10px;
+}
+
 #innerbox-playershow {
 	border: 2px solid black;
 }
 
-#innerbox-playerstats {
+#innerbox-playersats {
 	color: black;
 	border: 2px solid black;
 }
@@ -617,6 +657,13 @@ body {
 .backgroundright {
 	background-color: white;
 
+}
+
+#successfuladdleft {
+	display: none;
+}
+#successfuladdright {
+	display: none;
 }
 
 .green {

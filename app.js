@@ -39,6 +39,7 @@ app.get("/signup", function(req, res) {
 app.post("/signup", function(req, res) {
   db.User.create(req.body.user, function(err, user) {
     if (err) console.log(err);
+    req.login(user)
     res.redirect("/teams")
   })
 })
@@ -74,14 +75,14 @@ app.get("/teams", function(req, res) {
   db.Team.find({})
     .populate("owner")
     .exec(function(err, teams) {
-      res.render("teams/index", {teams: teams})
+      res.render("teams/index", {teams: teams, isLoggedIn: req.session.id})
     })
 })
 
 //New
 
 app.get("/teams/new", function(req, res) {
-  res.render("teams/new");
+  res.render("teams/new", {isLoggedIn: req.session.id});
 })
 
 //Show
@@ -90,7 +91,6 @@ app.get("/teams/:id", function(req, res) {
   db.Team.findById(req.params.id)
     .populate("players")
     .exec(function(err, team) {
-      console.log(team)
       res.render("teams/show", {team: team, isLoggedIn: req.session.id})
     })
 })
@@ -170,7 +170,7 @@ app.get("/players/:id", function(req, res) {
     .populate("team")
     .exec(function(err, player) {
       if(err) console.log(err);
-      res.render("players/show", {player: player})
+      res.render("players/show", {player: player, isLoggedIn: req.session.id})
     })
 })
 

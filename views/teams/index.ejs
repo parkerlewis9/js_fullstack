@@ -1,15 +1,30 @@
 <% include ../partials/header %>
 
+
+<div id="navagate-index">
+
+	<% if (isLoggedIn) {%>
+		<a href="/logout">Logout</a>
+	<% } else { %>
+		<a href="/">Home</a>
+		<!-- <a href="/login">Login</a> -->
+		<a href="/signup">Signup</a>
+	<% } %>
+
+
+</div>
 <div id="topbar-index">
 		
 	<div id="insidetopbar-index">
 
-		<div id="navagate-index">
-			<a href="/logout">Logout</a>
-		</div>
+		
 		<!-- <p>Welcome to The League</p> -->
 		<h1>The League</h1>
-		<form action="/teams/new"><input type="submit" value="Add a New Team to the League"></form>
+		
+		<% if (isLoggedIn) {%>
+			<form action="/teams/new"><input type="submit" value="Add a New Team to the League"></form>
+		<% } %>
+
 		<h3>Check out your competition:</h3>
 
 

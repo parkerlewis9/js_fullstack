@@ -102,6 +102,42 @@ $(document).ready(function() {
 		})
 
 
+//When actually adding a player to a team
+	$("#addplayerleft").on("submit", function(e) {
+		e.preventDefault();
+ 		var name = $("#nameplayerleft").html();
+ 		var arrName = name.split(" ");
+ 	//Look up their stats and imgUrl again
+ 		lookUpPlayerStats(arrName[0], arrName[1], "left", function(stats) {
+ 			$.ajax({
+ 					url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + arrName[0] + "+" + arrName[1] + "+" + "espn",
+ 					jsonp: "callback",
+ 					dataType: "jsonp"
+ 				}).done(function(data) {
+ 				// console.log(data.responseData.results[0].unescapedUrl);
+ 				var imgUrl = data.responseData.results[0].unescapedUrl;
+ 				var teamId = $("#teamid").attr("value")
+ 				var player = stats;
+ 				player.name = name;
+ 				player.imageUrl = imgUrl;
+ 				console.log(player)
+ 		//Actually create the player via a post
+ 				$.ajax({
+ 				  type: "POST",
+ 				  url: "/teams/" + teamId + "/players",
+ 				  data: player,
+ 				  
+ 				  dataType: "json"
+ 				}).done(function() {
+ 					$("#hiddenstatsleft-newplayer").fadeOut("slow", function() {
+ 						$("#successfuladdleft").fadeIn("slow") 	
+ 					})
+ 				})
+ 			})
+ 		})
+	})
+
+
 
 
 
@@ -159,6 +195,47 @@ $(document).ready(function() {
 		
 
 	})
+
+
+
+//When actually adding a player to a team
+	$("#addplayerright").on("submit", function(e) {
+		e.preventDefault();
+ 		var name = $("#nameplayerright").html();
+ 		var arrName = name.split(" ");
+ 	//Look up their stats and imgUrl again
+ 		lookUpPlayerStats(arrName[0], arrName[1], "right", function(stats) {
+ 			$.ajax({
+ 					url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + arrName[0] + "+" + arrName[1] + "+" + "espn",
+ 					jsonp: "callback",
+ 					dataType: "jsonp"
+ 				}).done(function(data) {
+ 				// console.log(data.responseData.results[0].unescapedUrl);
+ 				var imgUrl = data.responseData.results[0].unescapedUrl;
+ 				var teamId = $("#teamid").attr("value")
+ 				var player = stats;
+ 				player.name = name;
+ 				player.imageUrl = imgUrl;
+ 				console.log(player)
+ 		//Actually create the player via a post
+ 				$.ajax({
+ 				  type: "POST",
+ 				  url: "/teams/" + teamId + "/players",
+ 				  data: player,
+ 				  
+ 				  dataType: "json"
+ 				}).done(function() {
+ 					$("#hiddenstatsright-newplayer").fadeOut("slow", function() {
+ 						$("#successfuladdright").fadeIn("slow") 
+ 					})
+ 				})
+ 			})
+ 		})
+	})
+
+
+
+
 
 
 })

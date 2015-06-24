@@ -1,13 +1,17 @@
 <% include ../partials/teamShowPageHeader %>
 
+<div id="navagate-show">
+	<a href="/teams">The League</a>
+	<% if (isLoggedIn) { %>
+		<a href="/logout">Logout</a>
+	<% } %>
+</div>
 
 <div id="topbar-show">
 		
 	<div id="insidetopbar-show">
 
-		<div id="navagate-show">
-			<a href="/teams">To All Teams</a>
-		</div>
+
 		<h1><%= team.name %></h1>
 
 	</div>

@@ -1,12 +1,16 @@
 <% include ../partials/playersNewHeader %>
+<div id="navagate-newteam">
+	<a href="/teams">The League</a>
+	<% if (isLoggedIn) { %>
+		<a href="/logout">Logout</a>
+	<% } %>
+</div>
 
 <div id="topbar-newteam">
 		
 	<div id="insidetopbar-newteam">
 
-		<div id="navagate-newteam">
-			<a href="/teams">All of the Teams</a>
-		</div>
+		
 			<h1>Add a new team to The League!</h1>
 			<h3 id="directions">It's simple! Just add the name and an image to get started.</h3>
 	</div>
