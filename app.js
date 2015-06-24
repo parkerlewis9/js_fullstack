@@ -170,7 +170,20 @@ app.get("/players/:id", function(req, res) {
     .populate("team")
     .exec(function(err, player) {
       if(err) console.log(err);
-      res.render("players/show", {player: player, isLoggedIn: req.session.id})
+      res.format({
+        'text/html': function(){
+          res.render("players/show", {player: player, isLoggedIn: req.session.id})
+        },
+
+        'application/json': function(){
+          res.send({ player: player });
+        },
+        'default': function() {
+          // log the request and respond with 406
+          res.status(406).send('Not Acceptable');
+        }
+      });
+      
     })
 })
 

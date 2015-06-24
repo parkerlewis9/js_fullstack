@@ -2,29 +2,29 @@ $(document).ready(function() {
 
 //Ajax call to get data
 	$.ajax({
-			url: window.location.pathname
+			url: window.location.pathname,
 			method: "GET",
 			dataType: "json"
-		}).done(function(data) {
-			console.log(data)
+//Put data in to the array in data and then make the chart
+		}).done(function(player) {
+			console.log(player)
+			makeBarGraph(player, function() {
+				var myBarChart = new Chart(ctx).Bar(data, options);	
+			})
 		})
-	})
 
-
-
-
-
-
-
-
-
-
-
-
+//Set up context for the canvas
 	var ctx = $("#myChart").get(0).getContext("2d");
 
-	function makeBarGraph(callback) {
-		data.datasets[0].data.push(20);
+
+//Function to make the graph after the data has been loaded to the data object's data array
+	function makeBarGraph(player, callback) {
+
+		data.datasets[0].data.push(player.player.points);
+		data.datasets[0].data.push(player.player.assists);
+		data.datasets[0].data.push(player.player.rebounds);
+		data.datasets[0].data.push(player.player.steals);
+		data.datasets[0].data.push(player.player.blocks);
 		return callback();
 	}
 
@@ -38,7 +38,7 @@ $(document).ready(function() {
 	            strokeColor: "rgba(220,220,220,0.8)",
 	            highlightFill: "rgba(220,220,220,0.75)",
 	            highlightStroke: "rgba(220,220,220,1)",
-	            data: [59, 80, 81, 56]
+	            data: []
 	        }
 	    ]
 	};

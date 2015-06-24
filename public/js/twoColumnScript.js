@@ -154,7 +154,6 @@ $(document).ready(function() {
 		console.log(firstName)
 		console.log(lastName)
 		lookUpPlayerStats(firstName, lastName, "right", function(stats) {
-			console.log("hello")
 			$.ajax({
 					url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + firstName + "+" + lastName + "+" + "espn",
 					jsonp: "callback",
@@ -216,7 +215,6 @@ $(document).ready(function() {
  				var player = stats;
  				player.name = name;
  				player.imageUrl = imgUrl;
- 				console.log(player)
  		//Actually create the player via a post
  				$.ajax({
  				  type: "POST",
