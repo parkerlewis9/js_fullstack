@@ -534,9 +534,14 @@ body {
 	border: 2px solid black;
 }
 
-#innerbox-playersats {
+#innerbox-playerstats {
 	color: black;
 	border: 2px solid black;
+	text-align: center;
+}
+
+#myChart {
+	background-color: white;
 }
 
 
