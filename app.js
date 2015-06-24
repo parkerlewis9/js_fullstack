@@ -143,8 +143,9 @@ app.put("/teams/:id", function(req, res) {
 //Destroy
 
 app.delete("/teams/:id", function(req, res) {
-  if(err) console.log(err)
+  
   db.Team.findByIdAndRemove(req.params.id, function(err, team) {
+    if(err) console.log(err)
     res.redirect("/teams");
   })
 })

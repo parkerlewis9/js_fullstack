@@ -1,21 +1,28 @@
 <% include ../partials/playersNewHeader %>
 
-<div id="top-new">
-	<h1>Add a new team to The League!</h1>
-	<h3 id="directions">It's simple! Just add the name and an image to get started.</h3>
+<div id="topbar-newteam">
+		
+	<div id="insidetopbar-newteam">
+
+		<div id="navagate-newteam">
+			<a href="/teams">All of the Teams</a>
+		</div>
+			<h1>Add a new team to The League!</h1>
+			<h3 id="directions">It's simple! Just add the name and an image to get started.</h3>
+	</div>
+
 </div>
+
+
+
 
 <div id="main-new">
 	<form action="/teams" method="POST" id="newteamform">
-		<div>
 			<label for="name">Team Name:</label>
 				<input type="text" name="team[name]" id="name">
-		</div>
 
-		<div>
 			<label for="image">Image Url:</label>
 				<input type="text" name="team[imageUrl]" id="image">
-		</div>
 
 		<input type="submit" value="Add team">
 	</form>

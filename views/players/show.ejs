@@ -7,12 +7,25 @@
 		<div id="navagate-playershow">
 			<a href="/teams/<%= player.team._id %>">Back to <%= player.team.name %></a>
 		</div>
-		<!-- <p>Welcome to The League</p> -->
 		<h1><%= player.name %></h1>
-		<img src="<%= player.team.imageUrl %>" alt="Team Logo" height=200 width=250>
-
-
+		
 	</div>
+</div>
+
+
+<div id="innerbox-playershow" class="row col-md-6 col-md-offset-3">
+
+	<img src="<%= player.team.imageUrl %>" alt="Team Logo" height=200 width=250>
+	<img src="<%= player.imageUrl %>" alt="Player Photo" height=200 width= 250>
+		
+</div>
+
+<div id="innerbox-playerstats" class="row col-md-6 col-md-offset-3">
+	<p>Put stats data in here if you cant get the charts to work</p>
+
+		
+	
+
 
 </div>
 
