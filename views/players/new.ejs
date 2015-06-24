@@ -1,6 +1,59 @@
-<% include ../partials/playersNewHeader %>
+<% include ../partials/twoColumnHeader %>
 
-<div id="playersnew-header">
+<div id="navagate-newplayer">
+	<a href="/teams">All of the Teams</a>
+	<a href="/teams/<%= team._id %>">Back to <%= team.name %></a>
+</div>
+<div id="topbar-newplayer">
+		
+	<div id="insidetopbar-newplayer">
+
+			<h1>Draft players to <%= team.name %>!</h1>
+	</div>
+
+</div>
+
+<div id="twocolumnrow-newplayer" class="row">
+
+<!-- Left Column -->
+	<div class="col-md-4 col-md-offset-2 column" id="leftcolumn-newplayer">
+		<form action="/teams" id="formleft-newplayer">
+			<label for="labelleft-newplayer">Enter a First and Last Name:</label>
+			<p>Be sure to spell their first and last name correctly! <a href="http://www.google.com">Google</a></p>
+				<input type="text" name="firstnameinputleft-newplayer" class="nameinput" id="firstnameinput-newplayer" autofocus placeholder="First Name">
+				<input type="text" name="lastnameinputright-newplayer" class="nameinput" id="lastnameinputright-newplayer" placeholder="Last Name">
+			<input type="submit" class="nameinput" value="Find Player">
+		</form>
+	</div>
+
+
+<!-- Right Column -->
+	<div class="col-md-4 col-md-offset-0 column" id="rightcolumn-newplayer">
+		<form action="/teams" id="formright-newplayer">
+			<label for="labelright-newplayer">Enter a First and Last Name:</label>
+			<p>Be sure to spell their first and last name correctly! <a href="http://www.google.com">Google</a></p>
+				<input type="text" name="firstnameinputright-newplayer" class="nameinput" id="firstnameinput-newplayer" autofocus placeholder="First Name">
+				<input type="text" name="lastnameinputright-newplayer" class="nameinput" id="lastnameinputright-newplayer" placeholder="Last Name">
+			<input type="submit" class="nameinput" value="Find Player">
+		</form>
+		
+	</div>
+	
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div id="playersnew-header">
 	<h1>Add Players to <%= team.name %></h1>
 </div>
 
@@ -52,7 +105,7 @@
 
 
 
-</div>
+</div> -->
 
 
 

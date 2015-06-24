@@ -275,10 +275,45 @@ body {
 
 #hiddenstatsplayer1 {
 	display: none;
+	color: black;
 }
+
+#addagain {
+	color: black;
+}
+
+#hiddenstatsplayer1 h2 {
+	color: black;
+}
+
+#hiddenstatsplayer1 h4 {
+	color: black;
+}
+
+#hiddenstatsplayer1 form input {
+	background-color: white;
+}
+
 
 #successfuladd {
 	display: none;
+}
+
+#player1-form label {
+	color: black;
+}
+
+#player1-form p {
+	color: black;
+}
+
+#player1-form input {
+	background-color: white;
+	margin: 10px;
+}
+
+#gototeam {
+	color: black;
 }
 
 
@@ -465,7 +500,66 @@ body {
 }
 
 
+/*New Page for Players (two columns)*/
 
+#topbar-newplayer {
+	border: 2px solid black;
+	width: 100%;
+	height: 175px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: right;
+	color: black;
+}
+
+#insidetopbar-newplayer {
+	text-align: center;
+	border: 2px solid black;
+	background-color: rgb(49, 88, 171);
+/*	align-self: flex-end;*/
+}
+
+#insidetopbar-newplayer h1 {
+	padding-top: -10px;
+	padding-right: 45px;
+	padding-left: 45px;
+	font-size: 50px;
+	text-align: center;
+	background-color: rgb(49, 88, 171);
+/*	align-self: flex-end;*/
+}
+
+#navagate-newplayer {
+	background-color: rgb(49, 88, 171);
+	padding: 10px;
+	
+}
+
+#navagate-newplayer a {
+	margin-left: 10px;
+}
+
+.column {
+	text-align: center;
+	color: black;
+}
+
+#leftcolumn-newplayer {
+	border: 2px solid black;
+	height: 200px;
+	
+}
+
+#rightcolumn-newplayer {
+	border: 2px solid black;
+	height: 200px;
+	margin-left: 10px;
+}
+
+.nameinput {
+	background-color: white;
+}
 
 
 
