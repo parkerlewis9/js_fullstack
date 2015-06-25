@@ -154,6 +154,7 @@ $(document).ready(function() {
 		console.log(firstName)
 		console.log(lastName)
 		lookUpPlayerStats(firstName, lastName, "right", function(stats) {
+
 			$.ajax({
 					url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + firstName + "+" + lastName + "+" + "espn",
 					jsonp: "callback",
@@ -181,6 +182,15 @@ $(document).ready(function() {
 				$("#nameplayerright").html(firstName + " " + lastName)
 				//Show the div slowly
 				$("#hiddenstatsright-newplayer").fadeIn("slow", function() {
+
+
+//function to compare stats
+
+
+
+
+
+
 					//Remove values from textboxes
 					$("#firstnameinputright-newplayer").val("");
 					$("#lastnameinputright-newplayer").val("");
@@ -232,6 +242,26 @@ $(document).ready(function() {
 	})
 
 
+
+
+
+//Compare function:
+	function compareAndHighlight() {
+		//Grab Name
+
+		//(and parseInt)
+		//Points
+
+		//Assists
+
+		//Rebounds
+
+		//Steals
+
+		//Blocks
+
+		//Score and save to variables
+	}
 
 
 
