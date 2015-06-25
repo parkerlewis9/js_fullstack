@@ -266,11 +266,11 @@ $(document).ready(function() {
 		var leftAssists = parseInt($("#assistsplayerleft").html());
 		var rightAssists = parseInt($("#assistsplayerright").html());
 		//Rebounds
-		var leftAssists = parseInt($("#reboundsplayerleft").html());
-		var rightAssists = parseInt($("#reboundsplayerright").html());
+		var leftRebounds = parseInt($("#reboundsplayerleft").html());
+		var rightRebounds = parseInt($("#reboundsplayerright").html());
 		//Steals
 		var leftSteals = parseInt($("#stealsplayerleft").html());
-		var rightSteals = parseInt($("stealsplayerright").html());
+		var rightSteals = parseInt($("#stealsplayerright").html());
 		//Blocks
 		var leftBlocks = parseInt($("#blocksplayerleft").html());
 		var rightBlocks = parseInt($("#blocksplayerright").html());
@@ -300,6 +300,119 @@ $(document).ready(function() {
 			$("#pointsplayerright").addClass("backgroundright");
 			$("#pointsplayerright").removeClass("red");
 			$("#pointsplayerright").removeClass("green");
+		}	
+
+	//Compare Assists
+		if(leftAssists > rightAssists) {
+			$("#assistsplayerleft").addClass("green");
+			$("#assistsplayerleft").removeClass("red");
+			$("#assistsplayerright").addClass("red");
+			$("#assistsplayerright").removeClass("green");
+			left += 1;
+		} else if (leftAssists < rightAssists) {
+			$("#assistsplayerleft").addClass("red");
+			$("#assistsplayerleft").removeClass("green");
+			$("#assistsplayerright").addClass("green");
+			$("#assistsplayerright").removeClass("red");
+			right += 1;
+		} else if (leftAssists = rightAssists) {
+			$("#assistsplayerleft").addClass("backgroundleft");
+			$("#assistsplayerleft").removeClass("green");
+			$("#assistsplayerleft").removeClass("red");
+			$("#assistsplayerright").addClass("backgroundright");
+			$("#assistsplayerright").removeClass("red");
+			$("#assistsplayerright").removeClass("green");
+		}
+
+	//Compare Rebounds
+		if(leftRebounds > rightRebounds) {
+			$("#reboundsplayerleft").addClass("green");
+			$("#reboundsplayerleft").removeClass("red");
+			$("#reboundsplayerright").addClass("red");
+			$("#reboundsplayerright").removeClass("green");
+			left += 1;
+		} else if (leftRebounds < rightRebounds) {
+			$("#reboundsplayerleft").addClass("red");
+			$("#reboundsplayerleft").removeClass("green");
+			$("#reboundsplayerright").addClass("green");
+			$("#reboundsplayerright").removeClass("red");
+			right += 1;
+		} else if (leftRebounds = rightRebounds) {
+			$("#reboundsplayerleft").addClass("backgroundleft");
+			$("#reboundsplayerleft").removeClass("green");
+			$("#reboundsplayerleft").removeClass("red");
+			$("#reboundsplayerright").addClass("backgroundright");
+			$("#reboundsplayerright").removeClass("red");
+			$("#reboundsplayerright").removeClass("green");
+		}
+
+	//Compare Steals
+
+		if(leftSteals > rightSteals) {
+			$("#stealsplayerleft").addClass("green");
+			$("#stealsplayerleft").removeClass("red");
+			$("#stealsplayerright").addClass("red");
+			$("#stealsplayerright").removeClass("green");
+			left += 1;
+		} else if (leftSteals < rightSteals) {
+			$("#stealsplayerleft").addClass("red");
+			$("#stealsplayerleft").removeClass("green");
+			$("#stealsplayerright").addClass("green");
+			$("#stealsplayerright").removeClass("red");
+			right += 1;
+		} else if (leftSteals = rightSteals) {
+			$("#stealsplayerleft").addClass("backgroundleft");
+			$("#stealsplayerleft").removeClass("green");
+			$("#stealsplayerleft").removeClass("red");
+			$("#stealsplayerright").addClass("backgroundright");
+			$("#stealsplayerright").removeClass("red");
+			$("#stealsplayerright").removeClass("green");
+		}
+
+	//Compare Blocks
+
+		if(leftBlocks > rightBlocks) {
+			$("#blocksplayerleft").addClass("green");
+			$("#blocksplayerleft").removeClass("red");
+			$("#blocksplayerright").addClass("red");
+			$("#blocksplayerright").removeClass("green");
+			left += 1;
+		} else if (leftBlocks < rightBlocks) {
+			$("#blocksplayerleft").addClass("red");
+			$("#blocksplayerleft").removeClass("green");
+			$("#blocksplayerright").addClass("green");
+			$("#blocksplayerright").removeClass("red");
+			right += 1;
+		} else if (leftBlocks = rightBlocks) {
+			$("#blocksplayerleft").addClass("backgroundleft");
+			$("#blocksplayerleft").removeClass("green");
+			$("#blocksplayerleft").removeClass("red");
+			$("#blocksplayerright").addClass("backgroundright");
+			$("#blocksplayerright").removeClass("red");
+			$("#blocksplayerright").removeClass("green");
+		}
+
+	//Compare Score
+
+		if(leftScore > rightScore) {
+			$("#scoreplayerleft").addClass("green");
+			$("#scoreplayerleft").removeClass("red");
+			$("#scoreplayerright").addClass("red");
+			$("#scoreplayerright").removeClass("green");
+			left += 1;
+		} else if (leftScore < rightScore) {
+			$("#scoreplayerleft").addClass("red");
+			$("#scoreplayerleft").removeClass("green");
+			$("#scoreplayerright").addClass("green");
+			$("#scoreplayerright").removeClass("red");
+			right += 1;
+		} else if (leftScore = rightScore) {
+			$("#scoreplayerleft").addClass("backgroundleft");
+			$("#scoreplayerleft").removeClass("green");
+			$("#scoreplayerleft").removeClass("red");
+			$("#scoreplayerright").addClass("backgroundright");
+			$("#scoreplayerright").removeClass("red");
+			$("#scoreplayerright").removeClass("green");
 		}
 
 
@@ -333,16 +446,23 @@ $(document).ready(function() {
 		console.log($("#hiddenstatsleft-newplayer").attr("style"))
 		console.log($("#hiddenstatsright-newplayer").attr("style"))
 			if($("#hiddenstatsleft-newplayer").attr("style") === 'display: none;') {
-				console.log($("#nameplayerright"))
-				$("#nameplayerright").removeClass("red")
-				console.log("before")
+				$("#nameplayerright").removeClass("green red")
+				$("#pointsplayerright").removeClass("green red")
+				$("#assistsplayerright").removeClass("green red")
+				$("#reboundsplayerright").removeClass("green red")
+				$("#stealsplayerright").removeClass("green red")
+				$("#blocksplayerright").removeClass("green red")
+				$("#scoreplayerright").removeClass("green red")
 			}
 
 			if($("#hiddenstatsright-newplayer").attr("style") === 'display: none;') {
-				// $(".backgroundleft").toArray()[1].removeClass("red");
-				// $(".backgroundleft").toArray()[1].removeClass("green");
-				// $(".backgroundright").toArray()[1].removeClass("green");
-				// $(".backgroundright").toArray()[1].removeClass("red");
+				$("#nameplayerleft").removeClass("green red")
+				$("#pointsplayerleft").removeClass("green red")
+				$("#assistsplayerleft").removeClass("green red")
+				$("#reboundsplayerleft").removeClass("green red")
+				$("#stealsplayerleft").removeClass("green red")
+				$("#blocksplayerleft").removeClass("green red")
+				$("#scoreplayerleft").removeClass("green red")
 			}
 	}
 
