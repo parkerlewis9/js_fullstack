@@ -40,7 +40,6 @@ $(document).ready(function() {
 		 	 });
 	//If not: 	
 		  } else {
-		  	console.log("hello")
 		  	$("#form" + side + "-newplayer").append('<p id="errorMsg">Please try again. Check your spelling. (If it is correct we may not have that player on file.)</p>');
 		  }
 		});
@@ -56,10 +55,7 @@ $(document).ready(function() {
 			$("#successfuladdleft").hide()
 			var firstName = $("#firstnameinputleft-newplayer").val();
 			var lastName = $("#lastnameinputleft-newplayer").val();
-			console.log(firstName)
-			console.log(lastName)
 			lookUpPlayerStats(firstName, lastName, "left", function(stats) {
-				console.log("hello")
 				$.ajax({
 						url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + firstName + "+" + lastName + "+" + "espn",
 						jsonp: "callback",
@@ -87,6 +83,12 @@ $(document).ready(function() {
 					$("#nameplayerleft").html(firstName + " " + lastName)
 					//Show the div slowly
 					$("#hiddenstatsleft-newplayer").fadeIn("slow", function() {
+
+				//function to compare stats
+						compareAndHighlight()
+
+
+
 						//Remove values from textboxes
 						$("#firstnameinputleft-newplayer").val("");
 						$("#lastnameinputleft-newplayer").val("");
@@ -114,13 +116,11 @@ $(document).ready(function() {
  					jsonp: "callback",
  					dataType: "jsonp"
  				}).done(function(data) {
- 				// console.log(data.responseData.results[0].unescapedUrl);
  				var imgUrl = data.responseData.results[0].unescapedUrl;
  				var teamId = $("#teamid").attr("value")
  				var player = stats;
  				player.name = name;
  				player.imageUrl = imgUrl;
- 				console.log(player)
  		//Actually create the player via a post
  				$.ajax({
  				  type: "POST",
@@ -130,6 +130,9 @@ $(document).ready(function() {
  				  dataType: "json"
  				}).done(function() {
  					$("#hiddenstatsleft-newplayer").fadeOut("slow", function() {
+
+ 						clearWhenHidden()
+
  						$("#successfuladdleft").fadeIn("slow") 	
  					})
  				})
@@ -151,8 +154,6 @@ $(document).ready(function() {
 		$("#successfuladdright").hide()
 		var firstName = $("#firstnameinputright-newplayer").val();
 		var lastName = $("#lastnameinputright-newplayer").val();
-		console.log(firstName)
-		console.log(lastName)
 		lookUpPlayerStats(firstName, lastName, "right", function(stats) {
 
 			$.ajax({
@@ -185,7 +186,7 @@ $(document).ready(function() {
 
 
 //function to compare stats
-
+					compareAndHighlight()
 
 
 
@@ -219,7 +220,6 @@ $(document).ready(function() {
  					jsonp: "callback",
  					dataType: "jsonp"
  				}).done(function(data) {
- 				// console.log(data.responseData.results[0].unescapedUrl);
  				var imgUrl = data.responseData.results[0].unescapedUrl;
  				var teamId = $("#teamid").attr("value")
  				var player = stats;
@@ -234,6 +234,9 @@ $(document).ready(function() {
  				  dataType: "json"
  				}).done(function() {
  					$("#hiddenstatsright-newplayer").fadeOut("slow", function() {
+
+ 						clearWhenHidden()
+
  						$("#successfuladdright").fadeIn("slow") 
  					})
  				})
@@ -247,21 +250,103 @@ $(document).ready(function() {
 
 //Compare function:
 	function compareAndHighlight() {
-		//Grab Name
+	//Variables to see who is better
+		var left = 0;
+		var right = 0;
 
+	//Save all things to compare to variables
+		//Grab Name
+		var leftName = $("#nameplayerleft").html();
+		var rightName = $("#nameplayerright").html();
 		//(and parseInt)
 		//Points
-
+		var leftPoints = parseInt($("#pointsplayerleft").html());
+		var rightPoints = parseInt($("#pointsplayerright").html());
 		//Assists
-
+		var leftAssists = parseInt($("#assistsplayerleft").html());
+		var rightAssists = parseInt($("#assistsplayerright").html());
 		//Rebounds
-
+		var leftAssists = parseInt($("#reboundsplayerleft").html());
+		var rightAssists = parseInt($("#reboundsplayerright").html());
 		//Steals
-
+		var leftSteals = parseInt($("#stealsplayerleft").html());
+		var rightSteals = parseInt($("stealsplayerright").html());
 		//Blocks
-
+		var leftBlocks = parseInt($("#blocksplayerleft").html());
+		var rightBlocks = parseInt($("#blocksplayerright").html());
 		//Score and save to variables
+		var leftScore = parseInt($("#scoreplayerleft").html());
+		var rightScore = parseInt($("#scoreplayerright").html());
+
+		
+
+	//Compare Points
+		if(leftPoints > rightPoints) {
+			$("#pointsplayerleft").addClass("green");
+			$("#pointsplayerleft").removeClass("red");
+			$("#pointsplayerright").addClass("red");
+			$("#pointsplayerright").removeClass("green");
+			left += 1;
+		} else if (leftPoints < rightPoints) {
+			$("#pointsplayerleft").addClass("red");
+			$("#pointsplayerleft").removeClass("green");
+			$("#pointsplayerright").addClass("green");
+			$("#pointsplayerright").removeClass("red");
+			right += 1;
+		} else if (leftPoints = rightPoints) {
+			$("#pointsplayerleft").addClass("backgroundleft");
+			$("#pointsplayerleft").removeClass("green");
+			$("#pointsplayerleft").removeClass("red");
+			$("#pointsplayerright").addClass("backgroundright");
+			$("#pointsplayerright").removeClass("red");
+			$("#pointsplayerright").removeClass("green");
+		}
+
+
+
+
+
+	//Compare Overall
+		if(left > right) {
+			$("#nameplayerleft").addClass("green");
+			$("#nameplayerleft").removeClass("red");
+			$("#nameplayerright").addClass("red");
+			$("#nameplayerright").removeClass("green");
+		} else if (left < right) {
+			$("#nameplayerleft").addClass("red");
+			$("#nameplayerleft").removeClass("green");
+			$("#nameplayerright").addClass("green");
+			$("#nameplayerright").removeClass("red");
+		} else if (left = right) {
+			$("#nameplayerleft").addClass("backgroundleft");
+			$("#nameplayerleft").removeClass("green");
+			$("#nameplayerleft").removeClass("red");
+			$("#nameplayerright").addClass("backgroundright");
+			$("#nameplayerright").removeClass("red");
+			$("#nameplayerright").removeClass("green");
+		}
+
 	}
+
+	function clearWhenHidden() {
+		//Clear Colors if One Side is Empty
+		console.log($("#hiddenstatsleft-newplayer").attr("style"))
+		console.log($("#hiddenstatsright-newplayer").attr("style"))
+			if($("#hiddenstatsleft-newplayer").attr("style") === 'display: none;') {
+				console.log($("#nameplayerright"))
+				$("#nameplayerright").removeClass("red")
+				console.log("before")
+			}
+
+			if($("#hiddenstatsright-newplayer").attr("style") === 'display: none;') {
+				// $(".backgroundleft").toArray()[1].removeClass("red");
+				// $(".backgroundleft").toArray()[1].removeClass("green");
+				// $(".backgroundright").toArray()[1].removeClass("green");
+				// $(".backgroundright").toArray()[1].removeClass("red");
+			}
+	}
+
+
 
 
 

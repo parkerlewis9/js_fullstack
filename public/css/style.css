@@ -679,9 +679,9 @@ body {
 }
 
 .red {
-	-webkit-box-shadow: inset 0px 0px 36px 16px rgba(176,17,17,1);
-	-moz-box-shadow: inset 0px 0px 36px 16px rgba(176,17,17,1);
-	box-shadow: inset 0px 0px 36px 16px rgba(176,17,17,1);
+	-webkit-box-shadow: inset 0px 0px 36px 16px rgba(230,62,62,1);
+	-moz-box-shadow: inset 0px 0px 36px 16px rgba(230,62,62,1);
+	box-shadow: inset 0px 0px 36px 16px rgba(230,62,62,1);
 }
 
 
