@@ -673,15 +673,15 @@ body {
 }
 
 .green {
-	-webkit-box-shadow: inset 0px 0px 36px 16px rgba(16,176,27,1);
-	-moz-box-shadow: inset 0px 0px 36px 16px rgba(16,176,27,1);
-	box-shadow: inset 0px 0px 36px 16px rgba(16,176,27,1);	
+	-webkit-box-shadow: inset 0px 0px 15px 5px rgba(16,176,27,1);
+	-moz-box-shadow: inset 0px 0px 15px 5px rgba(16,176,27,1);
+	box-shadow: inset 0px 0px 15px 5px rgba(16,176,27,1);	
 }
 
 .red {
-	-webkit-box-shadow: inset 0px 0px 36px 16px rgba(230,62,62,1);
-	-moz-box-shadow: inset 0px 0px 36px 16px rgba(230,62,62,1);
-	box-shadow: inset 0px 0px 36px 16px rgba(230,62,62,1);
+	-webkit-box-shadow: inset 0px 0px 15px 5px rgba(230,62,62,1);
+	-moz-box-shadow: inset 0px 0px 15px 5px rgba(230,62,62,1);
+	box-shadow: inset 0px 0px 15px 5px rgba(230,62,62,1);
 }
 
 
