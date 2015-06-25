@@ -1,6 +1,7 @@
 var bcrypt = require("bcrypt");
 var SALT_WORK_FACTOR = 10;
 var mongoose = require("mongoose");
+var findOrCreate = require('mongoose-findorcreate')
 
 // Define Schema
 
@@ -25,6 +26,8 @@ var userSchema = new mongoose.Schema({
 	        ref: "Player"
 	    }]
 })
+
+userSchema.plugin(findOrCreate);
 
 //Before a user is made, make the password a hash:
 
