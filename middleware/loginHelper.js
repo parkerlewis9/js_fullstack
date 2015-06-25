@@ -13,4 +13,13 @@ var loginHelpers = function (req, res, next) {
   next();
 };
 
+// function isLoggedIn(req,res,next){
+// 	if(req.isAuthenticated()){
+// 		return next()
+// 	}
+// 		res.redirect("/")
+// }
+
+// app.use(isLoggedIn)
+
 module.exports = loginHelpers;

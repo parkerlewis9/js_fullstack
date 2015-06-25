@@ -1,12 +1,15 @@
 <% include ../partials/header %>
 
+<div id="navagate-edit">
+	<a href="/teams/<%= team._id%> "><%= team.name %></a>
+	<a href="/teams">The Leauge</a>
+</div>
+
 <div id="topbar-edit">
 		
 	<div id="insidetopbar-edit">
 
-		<div id="navagate-edit">
-			<a href="/teams">All of the Teams</a>
-		</div>
+		
 		<!-- <p>Welcome to The League</p> -->
 		<h1>Change <%= team.name %></h1>
 

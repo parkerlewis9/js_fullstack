@@ -1,8 +1,9 @@
 <% include ../partials/twoColumnHeader %>
 
 <div id="navagate-newplayer">
-	<a href="/teams">All of the Teams</a>
-	<a href="/teams/<%= team._id %>">Back to <%= team.name %></a>
+	<a href="/teams/<%= team._id %>"><%= team.name %></a>
+	<a href="/teams">The Leauge</a>
+	<a href="/logout">Logout</a>
 </div>
 <div id="topbar-newplayer">
 		

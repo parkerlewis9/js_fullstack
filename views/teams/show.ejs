@@ -20,8 +20,19 @@
 
 
 <div id="teamsshow-main">
-	
+	<% if (isLoggedIn == team.owner) {%>
+		<form class="optional" action="/teams/<%= team._id %>/edit">
+			<input type="submit" value="Edit <%= team.name %>">
+		</form>
+		
+		<form class="optional" action="/teams/<%= team._id %>?_method=DELETE" method="POST">
+			<input type="submit" value="Delete <%= team.name %>">
+			<input id="hiddenid" type="hidden" name="" value="<%= team._id %>">
+		</form>
+
+	<% } %>
 	<h2>Roster:</h2>
+
 	<div id="rosterdiv">
 		<table class="table table-hover">
 			<thead>
@@ -53,16 +64,7 @@
 					<%	})%>
 			</tbody>
 		</table>
-		<% if (isLoggedIn == team.owner) {%>
-			<form class="optional" action="/teams/<%= team._id %>?_method=DELETE" method="POST">
-				<input type="submit" value="Delete <%= team.name %>">
-				<input id="hiddenid" type="hidden" name="" value="<%= team._id %>">
-			</form>
-
-			<form class="optional" action="/teams/<%= team._id %>/edit">
-				<input type="submit" value="Edit <%= team.name %>">
-			</form>
-		<% } %>
+	
 	</div>
 </div>
 

@@ -8,12 +8,13 @@ var userSchema = new mongoose.Schema({
 
 		username: {
 			type: String,
-			unique: true,
-			required: true
+			// unique: true,
+			// required: true
 		},
+    facebookId: String,
 		password: {
 			type: String,
-			required: true
+			// required: true
 		},
 		teams: [{
 	        type: mongoose.Schema.Types.ObjectId,

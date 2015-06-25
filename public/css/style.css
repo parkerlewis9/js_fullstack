@@ -417,7 +417,9 @@ body {
 #rosterdiv form {
 	background-color: rgb(49, 88, 171);
 }
-#rosterdiv form input {
+form input {
+	margin-bottom: 10px;
+	margin-top: 10px;
 	background-color: white;
 }
 
@@ -426,11 +428,13 @@ body {
 }
 
 #rosterdiv td {
+	text-align: center;
 	background-color: rgb(49, 88, 171);
 	font-size: 20px
 }
 
 #rosterdiv th {
+	text-align: center;
 	background-color: rgb(49, 88, 171);
 	border: 2px solid black;
 }
@@ -471,6 +475,10 @@ body {
 #navagate-edit {
 	background-color: rgb(49, 88, 171);
 	padding-top: 10px;
+}
+
+#navagate-edit a {
+	margin-left: 10px;
 }
 
 #teamedit-main {
@@ -578,7 +586,7 @@ body {
 
 #navagate-newplayer {
 	background-color: rgb(49, 88, 171);
-	padding: 10px;
+	padding-top: 10px;
 	
 }
 

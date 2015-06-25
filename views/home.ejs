@@ -1,9 +1,12 @@
 <% include ./partials/header %>
 
+<div><a href="/auth/facebook">Facebook</a></div>
+
 <div id="topbar-home">
 		
 	<div id="loginbox">
 		<h1>The League</h1>
+		<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
 		<h4>Login</h4>
 		<form action="/login" method="POST">
 			<label for="username"></label>
@@ -34,5 +37,7 @@
 	</div>
 
 </div>
+
+
 
 <% include ./partials/footer %>

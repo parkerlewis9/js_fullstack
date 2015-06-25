@@ -1,11 +1,15 @@
+require('dotenv').load();
+
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     db = require("./models"),
     methodOverride = require("method-override"),
     session = require("cookie-session"),
-    morgan = require("morgan")
-    loginMiddleware = require("./middleware/loginHelper");
+    morgan = require("morgan"),
+    passport = require("passport"),
+    FacebookStrategy = require("passport-facebook").Strategy;
+    // loginMiddleware = require("./middleware/loginHelper");
     // routeMiddleware = require("./middleware/routeHelper");
 
 app.set('view engine', 'ejs');
@@ -20,13 +24,46 @@ app.use(session({
   name: "league chip"
 }));
 
+app.use(passport.initialize())
+app.use(passport.session())
+
+
+passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_ID,
+    clientSecret: process.env.FACEBOOK_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    enableProof: false
+  },
+  function(accessToken, refreshToken, profile, done) {
+    console.log("This is the access token:" , accessToken)
+    console.log("This is the refreshToken:" , refreshToken)
+    console.log("This is the profile:" , profile)
+    db.User.create({ facebookId: profile.id }, function (err, user) {
+      return done(err,user);
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  console.log("WE JUST SERIALIZED THE USER!")
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  console.log("WE JUST DESERIALIZED THE USER!")
+  db.User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 // use loginMiddleware everywhere!
-app.use(loginMiddleware);
+// app.use(loginMiddleware);
 
 //******************* Home ****************************
 
 app.get("/", function(req, res) {
+  console.log("THIS IS REQ.USER", req.user)
+  console.log("IS THIS USER ACTUALLY LOGGED IN???", req.isAuthenticated())
   res.render("home")
 })
 
@@ -43,6 +80,23 @@ app.post("/signup", function(req, res) {
     res.redirect("/teams")
   })
 })
+
+//******************* Login Facebook ****************************
+
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    console.log("WE SUCCESSFULLY AUTHENTICATED!")
+    // Successful authentication, redirect home.
+    res.redirect('/teams');
+  });
+
+
+
 
 //******************* Login ****************************
 
@@ -75,14 +129,15 @@ app.get("/teams", function(req, res) {
   db.Team.find({})
     .populate("owner")
     .exec(function(err, teams) {
-      res.render("teams/index", {teams: teams, isLoggedIn: req.session.id})
+      console.log(req.user)
+      res.render("teams/index", {teams: teams, isLoggedIn: req.user})
     })
 })
 
 //New
 
 app.get("/teams/new", function(req, res) {
-  res.render("teams/new", {isLoggedIn: req.session.id});
+  res.render("teams/new", {isLoggedIn: req.user._id});
 })
 
 //Show
@@ -91,7 +146,7 @@ app.get("/teams/:id", function(req, res) {
   db.Team.findById(req.params.id)
     .populate("players")
     .exec(function(err, team) {
-      res.render("teams/show", {team: team, isLoggedIn: req.session.id})
+      res.render("teams/show", {team: team, isLoggedIn: req.user._id})
     })
 })
 
@@ -100,9 +155,9 @@ app.get("/teams/:id", function(req, res) {
 app.post("/teams", function(req, res) {
   db.Team.create(req.body, function(err, team) {
     if(err) console.log(err);
-    team.owner = req.session.id;
+    team.owner = req.user._id;
     team.save();
-    db.User.findById(req.session.id, function(err, user) {
+    db.User.findById(req.user._id, function(err, user) {
       user.teams.push(team);
       user.save();
       res.format({
@@ -172,7 +227,7 @@ app.get("/players/:id", function(req, res) {
       if(err) console.log(err);
       res.format({
         'text/html': function(){
-          res.render("players/show", {player: player, isLoggedIn: req.session.id})
+          res.render("players/show", {player: player, isLoggedIn: req.user._id})
         },
 
         'application/json': function(){
@@ -193,14 +248,14 @@ app.post("/teams/:id/players", function(req, res) {
   console.log(req.body)
   db.Player.create(req.body, function(err, player) {
     if(err) console.log(err)
-    player.owner = req.session.id;
+    player.owner = req.user._id;
     player.team = req.params.id;
     player.save();
     db.Team.findById(req.params.id, function(err, team) {
       if(err) console.log(err);
       team.players.push(player);
       team.save();
-      db.User.findById(req.session.id, function(err, user) {
+      db.User.findById(req.user._id, function(err, user) {
         if(err) console.log(err);
         user.players.push(player);
         user.save()
