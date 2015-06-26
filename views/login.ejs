@@ -1,0 +1,43 @@
+<% include ./partials/header %>
+
+<div id="navagate-signup">
+	<a href="/">Home</a>
+</div>
+<div id="topbar-signup">
+
+	
+
+	<div id="insidetopbar">
+		<p>Welcome back to The League</p>
+	</div>
+
+
+
+
+</div>
+
+
+
+<div id="maindiv-signup">
+	
+	<div id="centered-login">
+		
+		<div>
+			<h4>Login</h4>
+			<form action="/login" method="POST">
+				<label for="username"></label>
+				<input type="text" name="local[username]" id="username" autofocus placeholder="Username">
+				<label for="password"></label>
+				<input type="password" name="local[password]" id="password" placeholder="Password">
+				<input type="submit" value="Sign Up">
+			</form>	
+		</div>
+		<div>
+			<a href="/auth/facebook"><img src="http://i.stack.imgur.com/ZW4QC.png" alt="Facebook"></a>
+
+		</div>
+	</div>
+
+</div>
+
+<% include ./partials/footer %>

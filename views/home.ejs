@@ -1,6 +1,5 @@
 <% include ./partials/header %>
 
-<div><a href="/auth/facebook">Facebook</a></div>
 
 <div id="topbar-home">
 		
@@ -8,13 +7,6 @@
 		<h1>The League</h1>
 		<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
 		<a href="/login"><h4>Login</h4></a>
-		<form action="/login" method="POST">
-			<label for="username"></label>
-			<input type="text" name="local[username]" id="username" autofocus placeholder="Username">
-			<label for="password"></label>
-			<input type="password" name="local[password]" id="password" placeholder="Password">
-			<input type="submit" value="Login">
-		</form>	
 		<p>Not yet an owner: <a href="/signup">Sign Up Here</a></p>
 
 	</div>

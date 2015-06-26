@@ -297,7 +297,7 @@ body {
 #playersnew-one {
 	/*height: 600px;*/
 	width: 65%;
-	border:2px solid black;
+	/*border:2px solid black;*/
 	text-align: center;
 }
 
@@ -690,6 +690,23 @@ form input {
 	-webkit-box-shadow: inset 0px 0px 15px 5px rgba(230,62,62,1);
 	-moz-box-shadow: inset 0px 0px 15px 5px rgba(230,62,62,1);
 	box-shadow: inset 0px 0px 15px 5px rgba(230,62,62,1);
+}
+
+
+/*Login*/
+
+#centered-login {
+	border: 2px solid black;
+	border-radius: 2%;
+	width: 85%;
+	height: 75%;
+	text-align: center;
+
+}
+
+#centered-login h4 {
+	color: black;
+
 }
 
 

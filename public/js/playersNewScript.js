@@ -3,17 +3,19 @@ var stats;
 
 //TODO --- Make one function to search for results  √
 
+
+//(API key is from probasketballapi.com and its under parkerlewis9 email address)
 	function lookUpPlayerStats(firstName, lastName, callback) {
 		console.log(firstName + " " + lastName)
 		$("#errorMsg").html("")
-		var url = "https://probasketballapi.com/players?api_key=SoBO1Is4dA2cpkR0J9mlMgbftZv5wzNu&first_name=" + firstName + "&last_name=" + lastName;
+		var url = "https://probasketballapi.com/players?api_key=xloPAXt91yKQEbd6zBLwZFNT53kpcumj&first_name=" + firstName + "&last_name=" + lastName;
 		//First request to get id:
 		$.post( url , function( data ) {
 		  var playerData = JSON.parse(data)
 	//If we get something back:
 		  if(playerData[0]) {
 		  	var player_id = playerData[0].player_id;
-		  	var newUrl = "https://probasketballapi.com/stats/players?api_key=SoBO1Is4dA2cpkR0J9mlMgbftZv5wzNu&player_id=" + player_id;
+		  	var newUrl = "https://probasketballapi.com/stats/players?api_key=xloPAXt91yKQEbd6zBLwZFNT53kpcumj&player_id=" + player_id;
 			//Request to get data:
 		  	$.post( newUrl , function( data ) {
 		   		 var playerStats = JSON.parse(data);
@@ -139,10 +141,18 @@ var stats;
 	//Get name and url and put them in object to send out
 		var teamName = $("#name").val();
 		var teamUrl = $("#image").val();
+		console.log(teamName)
+		console.log(typeof teamUrl)
+		if(teamName === "") {
+			return $("#newteamform").append("<p>Please add a team name.</p>")
+		}
+		if(teamUrl === "") {
+			return $("#newteamform").append("<p>Please add a team logo URL.</p>")
+		}
 		var teamData = {};
 		teamData.name = teamName;
 		teamData.imageUrl = teamUrl;
-	//Create the player
+	//Create the team
 		$.ajax({
 		  type: "POST",
 		  url: "/teams",
@@ -151,9 +161,10 @@ var stats;
 		}).done(function(data) {
 			$("#name").val("");
 			$("#image").val("");
-			$("#main-new").fadeOut("slow", function() {
+			$("#newteamform").fadeOut("slow", function() {
 				$("#playersnew-one").fadeIn("slow", function() {
 				//Add the teams info to the places that are required for making a player
+					// $("#main-new").hide()
 					$("#directions").html("Great! Now start adding players.");
 					$("#addplayer1").attr("action", "/teams/"+ data.team._id + "/players");
 					$("#teamid").attr("value", data.team._id);

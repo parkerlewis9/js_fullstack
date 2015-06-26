@@ -20,7 +20,7 @@
 
 
 <div id="teamsshow-main">
-	<% if (parseInt(isLoggedIn._id) == parseInt(team.owner)) {%>
+	<% if (parseInt(isLoggedIn._id) === parseInt(team.owner)) {%>
 		<form class="optional" action="/teams/<%= team._id %>/edit">
 			<input type="submit" value="Edit <%= team.name %>">
 		</form>
@@ -39,7 +39,7 @@
 				<th>Player's Photo</th>
 				<th>Player' Name</th>
 				
-				<% if (parseInt(isLoggedIn._id) == parseInt(team.owner)) {%>
+				<% if (parseInt(isLoggedIn._id) === parseInt(team.owner)) {%>
 					<th class="optional">Delete</th>
 				<% } %>
 
@@ -52,7 +52,7 @@
 						<td><img src="<%= player.imageUrl %>" alt="Photo of <%= player.name %>" height=200 width=250></td>
 						<td><a href="/players/<%= player.id %>"><%= player.name %></a></td>
 						
-						<% if (parseInt(isLoggedIn._id) == parseInt(team.owner)) {%>
+						<% if (parseInt(isLoggedIn._id) === parseInt(team.owner)) {%>
 							<td class="optional">
 								<form action="/players/<%= player._id %>?_method=DELETE" method="POST">
 									<input type="submit" value="Delete">

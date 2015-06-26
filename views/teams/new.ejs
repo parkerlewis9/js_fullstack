@@ -31,56 +31,58 @@
 		<input type="submit" value="Add team">
 	</form>
 
-</div>
+
+	<!-- Div to appear after team has been created -->
+	<div id="newplayer-teamsnew">
+		<div id="playersnew-one">
+			
+			<form action="/teams" id="player1-form">
+				<label for="player1first">Enter a First and Last Name:</label>
+				<p>Be sure to spell their first and last name correctly! <a href="http://www.google.com">Google</a></p>
+					<input type="text" name="player1first" id="player1first" autofocus placeholder="First Name">
+					<input type="text" name="player1last" id="player1last" placeholder="Last Name">
+				<input type="submit" value="Find Player">
+			</form>
+
+			<div id="hiddenstatsplayer1">
+
+				<div id="pictureplayer1">
+					<img src="" alt="Player Photo" id="urlplayer1" height=200 width=250>
+
+				</div>
+
+				<h2 id="nameplayer1"></h2>
+				<h3>Stats:</h3>
+				<h4>Points: <span id="pointsplayer1"></span></h4>
+				<h4>Assists: <span id="assistsplayer1"></span></h4>
+				<h4>Rebounds: <span id="reboundsplayer1"></span></h4>
+				<h4>Steals: <span id="stealsplayer1"></span></h4>
+				<h4>Blocks: <span id="blocksplayer1"></span></h4>
+				<h2>Score: <span id="scoreplayer1"></span></h2>
+
+		<!-- √ Need to fix this form action and hidden input value (add the /id part from client js after first ajax post) --> 
+				<form action="/teams/:id/players" id="addplayer1">
+					<input type="submit" value="Draft player to your team">
+					<input type="hidden" name="teamid" id= "teamid" value=":id">
+				</form>
+				<p id="gototeam" >Add this player or see your team <a href="/teams/:id">here</a></p>
 
 
-<!-- Div to appear after team has been created -->
-<div id="newplayer-teamsnew">
-	<div id="playersnew-one">
-		
-		<form action="/teams" id="player1-form">
-			<label for="player1first">Enter a First and Last Name:</label>
-			<p>Be sure to spell their first and last name correctly! <a href="http://www.google.com">Google</a></p>
-				<input type="text" name="player1first" id="player1first" autofocus placeholder="First Name">
-				<input type="text" name="player1last" id="player1last" placeholder="Last Name">
-			<input type="submit" value="Find Player">
-		</form>
 
-		<div id="hiddenstatsplayer1">
-
-			<div id="pictureplayer1">
-				<img src="" alt="Player Photo" id="urlplayer1" height=200 width=250>
+			</div>
+			<div id="successfuladd">
+		<!-- √ And here with the team thing -->
+				<p id="addagain">The player was drafted to your team. Draft another player or see your team <a href="/teams/:id">here</a></p>
 
 			</div>
 
-			<h2 id="nameplayer1"></h2>
-			<h3>Stats:</h3>
-			<h4>Points: <span id="pointsplayer1"></span></h4>
-			<h4>Assists: <span id="assistsplayer1"></span></h4>
-			<h4>Rebounds: <span id="reboundsplayer1"></span></h4>
-			<h4>Steals: <span id="stealsplayer1"></span></h4>
-			<h4>Blocks: <span id="blocksplayer1"></span></h4>
-			<h2>Score: <span id="scoreplayer1"></span></h2>
-
-	<!-- √ Need to fix this form action and hidden input value (add the /id part from client js after first ajax post) --> 
-			<form action="/teams/:id/players" id="addplayer1">
-				<input type="submit" value="Draft player to your team">
-				<input type="hidden" name="teamid" id= "teamid" value=":id">
-			</form>
-			<p id="gototeam" >Add this player or see your team <a href="/teams/:id">here</a></p>
-
-
 
 		</div>
-		<div id="successfuladd">
-	<!-- √ And here with the team thing -->
-			<p id="addagain">The player was drafted to your team. Draft another player or see your team <a href="/teams/:id">here</a></p>
-
-		</div>
-
-
 	</div>
 </div>
+
+
+
 
 <!-- <form action="/logout"><input type="submit" value="Logout"></form> -->
 

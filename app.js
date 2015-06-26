@@ -93,7 +93,7 @@ app.get("/", function(req, res) {
 
 //******************* Sign Up ****************************
 
-app.get("/signup", function(req, res) {
+app.get("/signup", routeMiddleware.preventLoginSignup, function(req, res) {
   res.render("signUp")
 })
 
@@ -177,8 +177,11 @@ app.get("/teams/:id", function(req, res) {
   db.Team.findById(req.params.id)
     .populate("players")
     .exec(function(err, team) {
-      
-      console.log(typeof parseInt(team.owner))
+      if(req.user === undefined) {
+        req.user = {id: ""}
+      }
+      console.log(req.user)
+      console.log(team.owner)
       res.render("teams/show", {team: team, isLoggedIn: req.user})
     })
 })
@@ -260,6 +263,9 @@ app.get("/players/:id", function(req, res) {
       if(err) console.log(err);
       res.format({
         'text/html': function(){
+          if(req.user === undefined) {
+            req.user = {_id: ""}
+          }
           res.render("players/show", {player: player, isLoggedIn: req.user._id})
         },
 
