@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/basketball_app2");
+mongoose.connect("mongodb://localhost/basketball_app");
 
 mongoose.set("debug", true)
 

@@ -11,7 +11,7 @@ var express = require('express'),
     LocalStrategy   = require('passport-local').Strategy,
     FacebookStrategy = require("passport-facebook").Strategy;
     // loginMiddleware = require("./middleware/loginHelper");
-    // routeMiddleware = require("./middleware/routeHelper");
+    routeMiddleware = require("./middleware/routeHelper");
 
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
@@ -134,6 +134,10 @@ app.get('/auth/facebook/callback',
 //******************* Login ****************************
 
 //TODO - add a separate login page to redirect to if they log in incorrectly
+
+app.get("/login", routeMiddleware.preventLoginSignup, function(req, res) {
+  res.render("login")
+})
 
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/' }),
