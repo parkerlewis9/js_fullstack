@@ -9,7 +9,9 @@ var express = require('express'),
     morgan = require("morgan"),
     passport = require("passport"),
     LocalStrategy   = require('passport-local').Strategy,
-    FacebookStrategy = require("passport-facebook").Strategy;
+    FacebookStrategy = require("passport-facebook").Strategy,
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
+
     // loginMiddleware = require("./middleware/loginHelper");
     routeMiddleware = require("./middleware/routeHelper");
 
@@ -28,7 +30,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-
+//Authentication for Facebook Login
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_ID,
     clientSecret: process.env.FACEBOOK_SECRET,
@@ -78,7 +80,22 @@ passport.deserializeUser(function(id, done) {
           });
       })) 
 
+//GOOGLE STRATEGY
 
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_ID,
+    clientSecret: process.env.GOOGLE_SECRET,
+    callbackURL: "http://localhost:3000/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    console.log("This is the access token:" , accessToken)
+    console.log("This is the refreshToken:" , refreshToken)
+    console.log("This is the profile:" , profile)
+    db.User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
 
 // use loginMiddleware everywhere!
 // app.use(loginMiddleware);
@@ -113,6 +130,20 @@ app.post("/signup", function(req, res) {
     
   })
 })
+
+//******************* Login Google ****************************
+
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/teams');
+  });
+
 
 //******************* Login Facebook ****************************
 
