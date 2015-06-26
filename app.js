@@ -8,6 +8,7 @@ var express = require('express'),
     session = require("cookie-session"),
     morgan = require("morgan"),
     passport = require("passport"),
+    LocalStrategy   = require('passport-local').Strategy,
     FacebookStrategy = require("passport-facebook").Strategy;
     // loginMiddleware = require("./middleware/loginHelper");
     // routeMiddleware = require("./middleware/routeHelper");
@@ -56,6 +57,29 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+// AUTHENTICATION FOR A USER
+  passport.use("local", new LocalStrategy.Strategy({
+    usernameField: "local[username]",
+    passwordField: "local[password]",
+    passReqToCallback: true
+  }, function(req, username, password, done) {
+      db.User.findOne({
+            "local.username": username
+          },
+          function (err, user) {
+            console.log("ERRORS?", err)
+            if (user === null){
+              console.log("USER IS NULL")
+              done(err,null);
+            }
+            else {
+              user.checkPassword(password, done);
+            }
+          });
+      })) 
+
+
+
 // use loginMiddleware everywhere!
 // app.use(loginMiddleware);
 
@@ -73,11 +97,20 @@ app.get("/signup", function(req, res) {
   res.render("signUp")
 })
 
+//change form 
 app.post("/signup", function(req, res) {
-  db.User.create(req.body.user, function(err, user) {
+  db.User.create({local: req.body.local}, function(err, user) {
+    
     if (err) console.log(err);
-    req.login(user)
-    res.redirect("/teams")
+    console.log("CREATED!")
+    passport.authenticate("local")(req, res, function(err,user) {
+      // console.log("SOMETHING WENT WRONG?", err)
+      // console.log("WE HAVE BEEN LOGGED IN!!");
+      // console.log(req.isAuthenticated())
+      // console.log(req.user)
+      res.redirect("/teams")  
+    })
+    
   })
 })
 
@@ -102,18 +135,12 @@ app.get('/auth/facebook/callback',
 
 //TODO - add a separate login page to redirect to if they log in incorrectly
 
-app.post("/login", function(req, res) {
-  var user = req.body.user;
-  db.User.authenticate(user, function(err, user) {
-    if(!err && user !== null) {
-      req.login(user);
-      res.redirect("/teams");
-    } else {
-      console.log(err);
-      res.redirect("/")
-    }
-  })
-})
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/teams');
+  });
+  
 
 //******************* Logout ****************************
 
@@ -146,7 +173,9 @@ app.get("/teams/:id", function(req, res) {
   db.Team.findById(req.params.id)
     .populate("players")
     .exec(function(err, team) {
-      res.render("teams/show", {team: team, isLoggedIn: req.user._id})
+      
+      console.log(typeof parseInt(team.owner))
+      res.render("teams/show", {team: team, isLoggedIn: req.user})
     })
 })
 
