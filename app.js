@@ -121,7 +121,7 @@ app.get('/auth/facebook',
   passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/' }),
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     console.log("WE SUCCESSFULLY AUTHENTICATED!")
     // Successful authentication, redirect home.
@@ -179,9 +179,12 @@ app.get("/teams/:id", function(req, res) {
     .exec(function(err, team) {
       if(req.user === undefined) {
         req.user = {id: ""}
-      }
-      console.log(req.user)
+      } 
+      console.log(req.user._id)
+      console.log(typeof req.user._id)
       console.log(team.owner)
+      console.log(typeof team.owner)
+
       res.render("teams/show", {team: team, isLoggedIn: req.user})
     })
 })
