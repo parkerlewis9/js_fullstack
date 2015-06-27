@@ -24,6 +24,8 @@ var userSchema = new mongoose.Schema({
 
     googleId: String,
 
+    twitterId: String,
+
 		// password: {
 		// 	type: String,
 		// 	// required: true

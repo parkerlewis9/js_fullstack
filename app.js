@@ -11,6 +11,7 @@ var express = require('express'),
     LocalStrategy   = require('passport-local').Strategy,
     FacebookStrategy = require("passport-facebook").Strategy,
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
+    TwitterStrategy = require("passport-twitter").Strategy,
 
     // loginMiddleware = require("./middleware/loginHelper");
     routeMiddleware = require("./middleware/routeHelper");
@@ -88,14 +89,35 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("This is the access token:" , accessToken)
-    console.log("This is the refreshToken:" , refreshToken)
-    console.log("This is the profile:" , profile)
+    console.log("This is the access token:" , accessToken);
+    console.log("This is the refreshToken:" , refreshToken);
+    console.log("This is the profile:" , profile);
     db.User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return done(err, user);
     });
   }
 ));
+
+//TWITTER STRATEGY
+
+passport.use(new TwitterStrategy({
+    consumerKey: process.env.TWITTER_KEY,
+    consumerSecret: process.env.TWITTER_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
+  },
+  function(token, tokenSecret, profile, done) {
+    console.log("This is the access token:" , token)
+    console.log("This is the refreshToken:" , tokenSecret)
+    console.log("This is the profile:" , profile)   
+    db.User.findOrCreate({ twitterId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+
+
+
+
 
 // use loginMiddleware everywhere!
 // app.use(loginMiddleware);
@@ -130,6 +152,19 @@ app.post("/signup", function(req, res) {
     
   })
 })
+
+//******************* Login Twitter ****************************
+
+app.get('/auth/twitter',
+  passport.authenticate('twitter'));
+
+app.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/teams');
+  });
+
 
 //******************* Login Google ****************************
 
@@ -209,7 +244,7 @@ app.get("/teams/:id", function(req, res) {
     .populate("players")
     .exec(function(err, team) {
       if(req.user === undefined) {
-        req.user = {id: ""}
+        req.user = {_id: "a"}
       } 
       console.log(req.user._id)
       console.log(typeof req.user._id)
