@@ -402,7 +402,11 @@ app.delete("/players/:id", function(req, res) {
 })
 
 
+//Catch All
 
+app.get('*', function(req,res){
+  res.render('404');
+});
 
 
 
