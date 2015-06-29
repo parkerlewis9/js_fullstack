@@ -23,7 +23,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(session({
-  maxAge: 3600000,
+  maxAge: 3600000000,
   secret: 'secret',
   name: "league chip"
 }));

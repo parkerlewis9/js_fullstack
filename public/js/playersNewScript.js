@@ -1,12 +1,58 @@
 $(document).ready(function() {
 var stats;
 
+// var firstNameArr = [];
+// var lastNameArr = [];
+
+
+
+
+// 	var urlTest = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX";
+// 	//First request to get id:
+// 	$.post( urlTest , function( data ) {
+// 	  var playerData = JSON.parse(data)
+// 	  var splitArr = [];
+// 	  playerData.forEach(function(datum) {
+// 	  	splitArr = datum.player_name.split(" ");
+// 	  	firstNameArr.push(splitArr[0])
+// 	  	lastNameArr.push(splitArr[1])
+// 	  })
+// 	  // console.log(firstNameArr)
+// 	  // console.log(lastNameArr)
+// 	  $("#player1first").keyup(function() {
+// 	  	var firstSearch = $("#player1first").val()
+// 	  	var firstExp = new RegExp(firstSearch, "i");
+
+// 	  	var firstOutput = '<ul class="searchresults">';
+
+// 	  	firstNameArr.forEach(function(first) {
+// 	  		if(first.search(firstExp) !== -1) {
+// 	  			firstOutput += "<li>";
+// 	  			firstOutput += first;
+// 	  			firstOutput += "</li>"
+// 	  		}
+// 	  		if(!firstSearch) {
+// 	  			firstOutput = ""
+// 	  		}
+// 	  	}) 
+// 	  	firstOutput += "</ul>";
+// 	  	$("#firstcomplete").html(firstOutput)
+// 	  	console.log(firstSearch)
+// 	  })
+
+// 	});
+
+
+
+
+
+
+
 //TODO --- Make one function to search for results  √
 
 
-//(API key is from probasketballapi.com and its under parkerlewis9 email address)
+//(API key is from probasketballapi.com and its under paike09 email address)
 	function lookUpPlayerStats(firstName, lastName, callback) {
-		console.log(firstName + " " + lastName)
 		$("#errorMsg").html("")
 		var url = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX&first_name=" + firstName + "&last_name=" + lastName;
 		//First request to get id:
