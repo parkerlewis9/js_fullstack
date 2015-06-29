@@ -35,7 +35,7 @@ app.use(passport.session())
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_ID,
     clientSecret: process.env.FACEBOOK_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    callbackURL: process.env.FACEBOOK_CALLBACK || "http://localhost:3000/auth/facebook/callback",
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
@@ -86,7 +86,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_ID,
     clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: process.env.GOOGLE_CALLBACK || "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     console.log("This is the access token:" , accessToken);
@@ -103,7 +103,7 @@ passport.use(new GoogleStrategy({
 passport.use(new TwitterStrategy({
     consumerKey: process.env.TWITTER_KEY,
     consumerSecret: process.env.TWITTER_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
+    callbackURL: process.env.TWITTER_CALLBACK || "http://127.0.0.1:3000/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, done) {
     console.log("This is the access token:" , token)
