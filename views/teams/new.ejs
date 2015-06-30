@@ -23,7 +23,7 @@
 <div id="main-new">
 	<form action="/teams" method="POST" id="newteamform">
 			<label for="name">Team Name:</label>
-				<input type="text" name="team[name]" id="name">
+				<input type="text" name="team[name]" id="name" autofocus>
 
 			<label for="image">Image Url:</label>
 				<input type="text" name="team[imageUrl]" id="image">
@@ -42,11 +42,10 @@
 					<input type="text" name="player1first" id="player1first" autofocus placeholder="First Name">
 					<input type="text" name="player1last" id="player1last" placeholder="Last Name">
 				<input type="submit" value="Find Player">
-<!-- 				<div id="firstcomplete">
-
-				</div> -->
 			</form>
-		
+		<div id="firstcomplete">
+
+		</div>
 
 			<div id="hiddenstatsplayer1">
 

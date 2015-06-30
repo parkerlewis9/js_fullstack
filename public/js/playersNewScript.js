@@ -1,48 +1,55 @@
 $(document).ready(function() {
-var stats;
+	var stats;
 
 // var firstNameArr = [];
 // var lastNameArr = [];
+	var playerName = [];
 
 
 
 
-// 	var urlTest = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX";
-// 	//First request to get id:
-// 	$.post( urlTest , function( data ) {
-// 	  var playerData = JSON.parse(data)
-// 	  var splitArr = [];
-// 	  playerData.forEach(function(datum) {
-// 	  	splitArr = datum.player_name.split(" ");
-// 	  	firstNameArr.push(splitArr[0])
-// 	  	lastNameArr.push(splitArr[1])
-// 	  })
-// 	  // console.log(firstNameArr)
-// 	  // console.log(lastNameArr)
-// 	  $("#player1first").keyup(function() {
-// 	  	var firstSearch = $("#player1first").val()
-// 	  	var firstExp = new RegExp(firstSearch, "i");
+	var urlTest = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX";
+	//First request to get id:
+	$.post( urlTest , function( data ) {
+	  var playerData = JSON.parse(data)
+	  var splitArr = [];
 
-// 	  	var firstOutput = '<ul class="searchresults">';
+	  playerData.forEach(function(datum) {
+	  	splitArr = datum.player_name.split(" ");
+	  	// firstNameArr.push(splitArr[0])
+	  	// lastNameArr.push(splitArr[1])
+	  	playerName.push(datum.player_name);
+	  })
 
-// 	  	firstNameArr.forEach(function(first) {
-// 	  		if(first.search(firstExp) !== -1) {
-// 	  			firstOutput += "<li>";
-// 	  			firstOutput += first;
-// 	  			firstOutput += "</li>"
-// 	  		}
-// 	  		if(!firstSearch) {
-// 	  			firstOutput = ""
-// 	  		}
-// 	  	}) 
-// 	  	firstOutput += "</ul>";
-// 	  	$("#firstcomplete").html(firstOutput)
-// 	  	console.log(firstSearch)
-// 	  })
+	  $("#player1first").keyup(dropDown)
 
-// 	});
+	});
 
 
+	function dropDown() {
+		var firstSearch = $("#player1first").val()
+		var firstExp = new RegExp(firstSearch, "i");
+		var firstOutput = '<ul class="searchresults">';
+
+		playerName.forEach(function(name) {
+			if(name.search(firstExp) !== -1) {
+				firstOutput += "<li>";
+				firstOutput += name;
+				firstOutput += "</li>"
+			}
+			if(!firstSearch) {
+				firstOutput = ""
+			}
+		}) 
+		firstOutput += "</ul>";
+
+		$("#firstcomplete").html(firstOutput)
+	}
+
+	$("body").on("click", "ul.searchresults", function(e) {
+		var child = $("li", this)
+		console.log(child)
+	})
 
 
 
@@ -216,6 +223,7 @@ var stats;
 					$("#teamid").attr("value", data.team._id);
 					$("#successfuladd a").attr("href", "/teams/" + data.team._id);
 					$("#gototeam a").attr("href", "/teams/" + data.team._id);
+					$("#player1first").focus()
 				});
 			})
 			

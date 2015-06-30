@@ -353,14 +353,33 @@ body {
 }
 
 #firstcomplete {
-	width: 150px;
-	margin-left: 100px;
+	width: 300px;
+	margin: 0% 35%;
 	border: 2px solid black;
 	background-color: white;
 	color: black;
 	position: absolute;
 }
 
+#firstcomplete ul {
+	background-color: white;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
+#firstcomplete li {
+	list-style-type: none;
+	text-align: left;
+	height: 40px;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	background-color: white;
+	margin-left: -40px;
+	font-size: 18px
+}
+
+#firstcomplete li:hover {
+	background-color: grey;
+}
 
 
 /*Teams Show Page*/
