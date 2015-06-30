@@ -38,7 +38,7 @@ $(document).ready(function() {
 		}) 
 
 		$(".searchresults").html(firstOutput)
-		$("#firstcomplete").show()
+		$(".autocomplete").show()
 	}
 
 	function dropDownLast() {
@@ -58,12 +58,12 @@ $(document).ready(function() {
 		}) 
 
 		$(".searchresults").html(lastOutput)
-		$("#firstcomplete").show()
+		$(".autocomplete").show()
 	}
 
 	//Event listener for when the particular li is clicked
 	$(".searchresults").on("click", "li", function(e) {
-		$("#firstcomplete").hide()
+		$(".autocomplete").hide()
 		$("#submitplayer").focus()
 		//Get the name, split it and then put the parts into the the input fields
 		var fullName = $(this).html();

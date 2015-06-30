@@ -352,7 +352,7 @@ body {
 	color: black;
 }
 
-#firstcomplete {
+.autocomplete {
 	width: 300px;
 	margin: 0% 35%;
 	border: 2px solid black;
@@ -362,12 +362,12 @@ body {
 	display: none;
 }
 
-#firstcomplete ul {
+.autocomplete ul {
 	background-color: white;
 	border-top: 2px solid black;
 	border-bottom: 2px solid black;
 }
-#firstcomplete li {
+.autocomplete li {
 	list-style-type: none;
 	text-align: left;
 	height: 40px;
@@ -378,7 +378,7 @@ body {
 	font-size: 18px
 }
 
-#firstcomplete li:hover {
+.autocomplete li:hover {
 	background-color: grey;
 }
 
@@ -731,6 +731,17 @@ form input {
 	-moz-box-shadow: inset 0px 0px 15px 5px rgba(230,62,62,1);
 	box-shadow: inset 0px 0px 15px 5px rgba(230,62,62,1);
 }
+
+
+
+#leftcomplete {
+	margin: 0% 10%;
+}
+
+
+
+
+
 
 
 /*Login*/

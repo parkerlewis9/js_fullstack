@@ -466,6 +466,86 @@ $(document).ready(function() {
 			}
 	}
 
+//Auto complete script
+
+	var playerName = [];
+
+	//Get data for all of the names to display in autocomplete list
+	var urlTest = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX";
+	$.post( urlTest , function( data ) {
+	  var playerData = JSON.parse(data)
+	  var splitArr = [];
+
+	  playerData.forEach(function(datum) {
+	  	splitArr = datum.player_name.split(" ");
+	  	playerName.push(datum.player_name);
+	  })
+	  //event listeners for the two inputs
+	  //Left
+	  $("#firstnameinputleft-newplayer").keyup(dropDownFirstLeft);
+	  $("#lastnameinputleft-newplayer").keyup(dropDownLastLeft);
+
+	  //Right
+
+	});
+
+
+	function dropDownFirstLeft() {
+		var firstSearch = $("#firstnameinputleft-newplayer").val()
+		var firstExp = new RegExp(firstSearch, "i");
+		var firstOutput = '';
+	//Build the li's if the input matches the regular expression
+		playerName.forEach(function(name) {
+			if(name.search(firstExp) !== -1) {
+				firstOutput += "<li>";
+				firstOutput += name;
+				firstOutput += "</li>"
+			}
+			if(!firstSearch) {
+				firstOutput = ""
+			}
+		}) 
+
+		$("#leftsearchresults").html(firstOutput)
+		$(".autocomplete").show()
+	}
+
+	function dropDownLastLeft() {
+		var lastSearch = $("#lastnameinputleft-newplayer").val()
+		var lastExp = new RegExp(lastSearch, "i");
+		var lastOutput = '';
+	//Build the li's if the input matches the regular expression
+		playerName.forEach(function(name) {
+			if(name.search(lastExp) !== -1) {
+				lastOutput += "<li>";
+				lastOutput += name;
+				lastOutput += "</li>"
+			}
+			if(!lastSearch) {
+				lastOutput = ""
+			}
+		}) 
+
+		$("#leftsearchresults").html(lastOutput)
+		$(".autocomplete").show()
+	}
+
+	//Event listener for when the particular li is clicked
+	$("#leftsearchresults").on("click", "li", function(e) {
+		$(".autocomplete").hide()
+		$("#submitplayerleft").focus()
+		//Get the name, split it and then put the parts into the the input fields
+		var fullName = $(this).html();
+		var nameSplit = fullName.split(" ");
+		$("#firstnameinputleft-newplayer").val(nameSplit[0])
+		$("#lastnameinputleft-newplayer").val(nameSplit[1])
+	})
+
+
+
+
+
+
 
 
 
