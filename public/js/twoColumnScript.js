@@ -486,10 +486,13 @@ $(document).ready(function() {
 	  $("#lastnameinputleft-newplayer").keyup(dropDownLastLeft);
 
 	  //Right
-
+	  $("#firstnameinputright-newplayer").keyup(dropDownFirstRight);
+	  $("#lastnameinputright-newplayer").keyup(dropDownLastRight);
 	});
 
 
+
+//Left half
 	function dropDownFirstLeft() {
 		var firstSearch = $("#firstnameinputleft-newplayer").val()
 		var firstExp = new RegExp(firstSearch, "i");
@@ -507,7 +510,7 @@ $(document).ready(function() {
 		}) 
 
 		$("#leftsearchresults").html(firstOutput)
-		$(".autocomplete").show()
+		$("#leftcomplete").show()
 	}
 
 	function dropDownLastLeft() {
@@ -527,7 +530,7 @@ $(document).ready(function() {
 		}) 
 
 		$("#leftsearchresults").html(lastOutput)
-		$(".autocomplete").show()
+		$("#leftcomplete").show()
 	}
 
 	//Event listener for when the particular li is clicked
@@ -539,6 +542,59 @@ $(document).ready(function() {
 		var nameSplit = fullName.split(" ");
 		$("#firstnameinputleft-newplayer").val(nameSplit[0])
 		$("#lastnameinputleft-newplayer").val(nameSplit[1])
+	})
+
+
+//Right half
+	function dropDownFirstRight() {
+		var firstSearch = $("#firstnameinputright-newplayer").val()
+		var firstExp = new RegExp(firstSearch, "i");
+		var firstOutput = '';
+	//Build the li's if the input matches the regular expression
+		playerName.forEach(function(name) {
+			if(name.search(firstExp) !== -1) {
+				firstOutput += "<li>";
+				firstOutput += name;
+				firstOutput += "</li>"
+			}
+			if(!firstSearch) {
+				firstOutput = ""
+			}
+		}) 
+
+		$("#rightsearchresults").html(firstOutput)
+		$("#rightcomplete").show()
+	}
+
+	function dropDownLastRight() {
+		var lastSearch = $("#lastnameinputright-newplayer").val()
+		var lastExp = new RegExp(lastSearch, "i");
+		var lastOutput = '';
+	//Build the li's if the input matches the regular expression
+		playerName.forEach(function(name) {
+			if(name.search(lastExp) !== -1) {
+				lastOutput += "<li>";
+				lastOutput += name;
+				lastOutput += "</li>"
+			}
+			if(!lastSearch) {
+				lastOutput = ""
+			}
+		}) 
+
+		$("#rightsearchresults").html(lastOutput)
+		$("#rightcomplete").show()
+	}
+
+	//Event listener for when the particular li is clicked
+	$("#rightsearchresults").on("click", "li", function(e) {
+		$(".autocomplete").hide()
+		$("#submitplayerright").focus()
+		//Get the name, split it and then put the parts into the the input fields
+		var fullName = $(this).html();
+		var nameSplit = fullName.split(" ");
+		$("#firstnameinputright-newplayer").val(nameSplit[0])
+		$("#lastnameinputright-newplayer").val(nameSplit[1])
 	})
 
 

@@ -735,7 +735,11 @@ form input {
 
 
 #leftcomplete {
-	margin: 0% 10%;
+	margin: 0% 15%;
+}
+
+#rightcomplete {
+	margin: 0% 15%;
 }
 
 
