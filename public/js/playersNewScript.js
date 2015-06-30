@@ -1,36 +1,31 @@
 $(document).ready(function() {
 	var stats;
-
-// var firstNameArr = [];
-// var lastNameArr = [];
 	var playerName = [];
 
 
 
-
+	//Get data for all of the names to display in autocomplete list
 	var urlTest = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX";
-	//First request to get id:
 	$.post( urlTest , function( data ) {
 	  var playerData = JSON.parse(data)
 	  var splitArr = [];
 
 	  playerData.forEach(function(datum) {
 	  	splitArr = datum.player_name.split(" ");
-	  	// firstNameArr.push(splitArr[0])
-	  	// lastNameArr.push(splitArr[1])
 	  	playerName.push(datum.player_name);
 	  })
-
-	  $("#player1first").keyup(dropDown)
+	  //event listeners for the two inputs
+	  $("#player1first").keyup(dropDownFirst);
+	  $("#player1last").keyup(dropDownLast);
 
 	});
 
 
-	function dropDown() {
+	function dropDownFirst() {
 		var firstSearch = $("#player1first").val()
 		var firstExp = new RegExp(firstSearch, "i");
-		var firstOutput = '<ul class="searchresults">';
-
+		var firstOutput = '';
+	//Build the li's if the input matches the regular expression
 		playerName.forEach(function(name) {
 			if(name.search(firstExp) !== -1) {
 				firstOutput += "<li>";
@@ -41,14 +36,40 @@ $(document).ready(function() {
 				firstOutput = ""
 			}
 		}) 
-		firstOutput += "</ul>";
 
-		$("#firstcomplete").html(firstOutput)
+		$(".searchresults").html(firstOutput)
+		$("#firstcomplete").show()
 	}
 
-	$("body").on("click", "ul.searchresults", function(e) {
-		var child = $("li", this)
-		console.log(child)
+	function dropDownLast() {
+		var lastSearch = $("#player1last").val()
+		var lastExp = new RegExp(lastSearch, "i");
+		var lastOutput = '';
+	//Build the li's if the input matches the regular expression
+		playerName.forEach(function(name) {
+			if(name.search(lastExp) !== -1) {
+				lastOutput += "<li>";
+				lastOutput += name;
+				lastOutput += "</li>"
+			}
+			if(!lastSearch) {
+				lastOutput = ""
+			}
+		}) 
+
+		$(".searchresults").html(lastOutput)
+		$("#firstcomplete").show()
+	}
+
+	//Event listener for when the particular li is clicked
+	$(".searchresults").on("click", "li", function(e) {
+		$("#firstcomplete").hide()
+		$("#submitplayer").focus()
+		//Get the name, split it and then put the parts into the the input fields
+		var fullName = $(this).html();
+		var nameSplit = fullName.split(" ");
+		$("#player1first").val(nameSplit[0])
+		$("#player1last").val(nameSplit[1])
 	})
 
 
@@ -108,6 +129,7 @@ $(document).ready(function() {
 	$("#player1-form").on("submit", function(e) {
 		e.preventDefault();
 		$("#successfuladd").hide()
+		// $(".searchresults").hide()
 		var firstName = $("#player1first").val();
 		var lastName = $("#player1last").val();
 		lookUpPlayerStats(firstName, lastName, function(stats) {
@@ -182,6 +204,7 @@ $(document).ready(function() {
  				}).done(function() {
  					$("#hiddenstatsplayer1").fadeOut("slow", function() {
  						$("#successfuladd").fadeIn("fast")
+ 						$("#player1first").focus()
  					})
  				})
  			})

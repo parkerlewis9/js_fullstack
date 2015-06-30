@@ -359,6 +359,7 @@ body {
 	background-color: white;
 	color: black;
 	position: absolute;
+	display: none;
 }
 
 #firstcomplete ul {
