@@ -81,7 +81,7 @@ $(document).ready(function() {
 
 //(API key is from probasketballapi.com and its under paike09 email address)
 	function lookUpPlayerStats(firstName, lastName, callback) {
-		$("#errorMsg").html("")
+		$(".errorMsg").html("")
 		var url = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX&first_name=" + firstName + "&last_name=" + lastName;
 		//First request to get id:
 		$.post( url , function( data ) {
@@ -118,7 +118,7 @@ $(document).ready(function() {
 		 	 });
 	//If not: 	
 		  } else {
-		  	$("#player1-form").append('<p id="errorMsg">Please try again. Check your spelling. (If it is correct we may not have that player on file.)</p>');
+		  	$("#player1-form").append('<p class="errorMsg">Please try again. Check your spelling. (If it is correct we may not have that player on file.)</p>');
 		  }
 		});
 	}
@@ -129,11 +129,9 @@ $(document).ready(function() {
 	$("#player1-form").on("submit", function(e) {
 		e.preventDefault();
 		$("#successfuladd").hide()
-		// $(".searchresults").hide()
 		var firstName = $("#player1first").val();
 		var lastName = $("#player1last").val();
 		lookUpPlayerStats(firstName, lastName, function(stats) {
-			// var picUrl = 
 			$.ajax({
 					url: "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + firstName + "+" + lastName + "+" + "espn",
 					jsonp: "callback",
@@ -187,13 +185,11 @@ $(document).ready(function() {
  					jsonp: "callback",
  					dataType: "jsonp"
  				}).done(function(data) {
- 				// console.log(data.responseData.results[0].unescapedUrl);
  				var imgUrl = data.responseData.results[0].unescapedUrl;
  				var teamId = $("#teamid").attr("value")
  				var player = stats;
  				player.name = name;
  				player.imageUrl = imgUrl;
- 				console.log(player)
  		//Actually create the player via a post
  				$.ajax({
  				  type: "POST",
@@ -217,8 +213,6 @@ $(document).ready(function() {
 	//Get name and url and put them in object to send out
 		var teamName = $("#name").val();
 		var teamUrl = $("#image").val();
-		console.log(teamName)
-		console.log(typeof teamUrl)
 		if(teamName === "") {
 			return $("#newteamform").append("<p>Please add a team name.</p>")
 		}
@@ -240,7 +234,6 @@ $(document).ready(function() {
 			$("#newteamform").fadeOut("slow", function() {
 				$("#playersnew-one").fadeIn("slow", function() {
 				//Add the teams info to the places that are required for making a player
-					// $("#main-new").hide()
 					$("#directions").html("Great! Now start adding players.");
 					$("#addplayer1").attr("action", "/teams/"+ data.team._id + "/players");
 					$("#teamid").attr("value", data.team._id);

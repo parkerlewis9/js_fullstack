@@ -12,9 +12,8 @@ var express = require('express'),
     FacebookStrategy = require("passport-facebook").Strategy,
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     TwitterStrategy = require("passport-twitter").Strategy,
-
-    // loginMiddleware = require("./middleware/loginHelper");
     routeMiddleware = require("./middleware/routeHelper");
+
 
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
@@ -22,11 +21,13 @@ app.use(morgan('tiny'));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 
+
 app.use(session({
   maxAge: 3600000000,
   secret: 'secret',
   name: "league chip"
 }));
+
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -39,26 +40,24 @@ passport.use(new FacebookStrategy({
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("This is the access token:" , accessToken)
-    console.log("This is the refreshToken:" , refreshToken)
-    console.log("This is the profile:" , profile)
     db.User.findOrCreate({ facebookId: profile.id }, function (err, user) {
       return done(err,user);
     });
   }
 ));
 
+//Serializer and Deserializer
+
 passport.serializeUser(function(user, done) {
-  console.log("WE JUST SERIALIZED THE USER!")
   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  console.log("WE JUST DESERIALIZED THE USER!")
   db.User.findById(id, function(err, user) {
     done(err, user);
   });
 });
+
 
 // AUTHENTICATION FOR A USER
   passport.use("local", new LocalStrategy.Strategy({
@@ -70,9 +69,7 @@ passport.deserializeUser(function(id, done) {
             "local.username": username
           },
           function (err, user) {
-            console.log("ERRORS?", err)
             if (user === null){
-              console.log("USER IS NULL")
               done(err,null);
             }
             else {
@@ -89,9 +86,6 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK || "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("This is the access token:" , accessToken);
-    console.log("This is the refreshToken:" , refreshToken);
-    console.log("This is the profile:" , profile);
     db.User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return done(err, user);
     });
@@ -106,9 +100,6 @@ passport.use(new TwitterStrategy({
     callbackURL: process.env.TWITTER_CALLBACK || "http://127.0.0.1:3000/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, done) {
-    console.log("This is the access token:" , token)
-    console.log("This is the refreshToken:" , tokenSecret)
-    console.log("This is the profile:" , profile)   
     db.User.findOrCreate({ twitterId: profile.id }, function (err, user) {
       return done(err, user);
     });
@@ -117,16 +108,9 @@ passport.use(new TwitterStrategy({
 
 
 
-
-
-// use loginMiddleware everywhere!
-// app.use(loginMiddleware);
-
 //******************* Home ****************************
 
 app.get("/", function(req, res) {
-  console.log("THIS IS REQ.USER", req.user)
-  console.log("IS THIS USER ACTUALLY LOGGED IN???", req.isAuthenticated())
   res.render("home")
 })
 
@@ -141,12 +125,7 @@ app.post("/signup", function(req, res) {
   db.User.create({local: req.body.local}, function(err, user) {
     
     if (err) console.log(err);
-    console.log("CREATED!")
     passport.authenticate("local")(req, res, function(err,user) {
-      // console.log("SOMETHING WENT WRONG?", err)
-      // console.log("WE HAVE BEEN LOGGED IN!!");
-      // console.log(req.isAuthenticated())
-      // console.log(req.user)
       res.redirect("/teams")  
     })
     
@@ -189,7 +168,6 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log("WE SUCCESSFULLY AUTHENTICATED!")
     // Successful authentication, redirect home.
     res.redirect('/teams');
   });
@@ -199,7 +177,7 @@ app.get('/auth/facebook/callback',
 
 //******************* Login ****************************
 
-//TODO - add a separate login page to redirect to if they log in incorrectly
+//TODO - add a separate login page to redirect to if they log in incorrectly √
 
 app.get("/login", routeMiddleware.preventLoginSignup, function(req, res) {
   res.render("login")
@@ -226,7 +204,6 @@ app.get("/teams", function(req, res) {
   db.Team.find({})
     .populate("owner")
     .exec(function(err, teams) {
-      console.log(req.user)
       res.render("teams/index", {teams: teams, isLoggedIn: req.user})
     })
 })
@@ -246,11 +223,6 @@ app.get("/teams/:id", function(req, res) {
       if(req.user === undefined) {
         req.user = {_id: "a"}
       } 
-      console.log(req.user._id)
-      console.log(typeof req.user._id)
-      console.log(team.owner)
-      console.log(typeof team.owner)
-
       res.render("teams/show", {team: team, isLoggedIn: req.user})
     })
 })
@@ -353,7 +325,6 @@ app.get("/players/:id", function(req, res) {
 //Create
 
 app.post("/teams/:id/players", function(req, res) {
-  console.log(req.body)
   db.Player.create(req.body, function(err, player) {
     if(err) console.log(err)
     player.owner = req.user._id;

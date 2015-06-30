@@ -7,7 +7,6 @@ $(document).ready(function() {
 			dataType: "json"
 //Put data in to the array in data and then make the chart
 		}).done(function(player) {
-			console.log(player)
 			makeBarGraph(player, function() {
 				var myBarChart = new Chart(ctx).Bar(data, options);	
 			})
@@ -78,9 +77,7 @@ $(document).ready(function() {
 				    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
 				}
-	// makeBarGraph(function() {
-	// 	var myBarChart = new Chart(ctx).Bar(data, options);	
-	// })
+
 	
 
 

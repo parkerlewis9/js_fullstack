@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	function lookUpPlayerStats(firstName, lastName, side, callback) {
 
-		$("#errorMsg").html("")
+		$(".errorMsg").html("")
 		var url = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX&first_name=" + firstName + "&last_name=" + lastName;
 		//First request to get id:
 		$.post( url , function( data ) {
@@ -40,7 +40,7 @@ $(document).ready(function() {
 		 	 });
 	//If not: 	
 		  } else {
-		  	$("#form" + side + "-newplayer").append('<p id="errorMsg">Please try again. Check your spelling. (If it is correct we may not have that player on file.)</p>');
+		  	$("#form" + side + "-newplayer").append('<p class="errorMsg">Please try again. Check your spelling. (If it is correct we may not have that player on file.)</p>');
 		  }
 		});
 	}
@@ -443,8 +443,6 @@ $(document).ready(function() {
 
 	function clearWhenHidden() {
 		//Clear Colors if One Side is Empty
-		console.log($("#hiddenstatsleft-newplayer").attr("style"))
-		console.log($("#hiddenstatsright-newplayer").attr("style"))
 			if($("#hiddenstatsleft-newplayer").attr("style") === 'display: none;') {
 				$("#nameplayerright").removeClass("green red")
 				$("#pointsplayerright").removeClass("green red")

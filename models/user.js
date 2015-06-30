@@ -9,12 +9,6 @@ var LocalStrategy = require("passport-local");
 
 var userSchema = new mongoose.Schema({
 
-		// username: {
-		// 	type: String,
-		// 	// unique: true,
-		// 	// required: true
-		// },
-
     local: {
       username: String,
       password: String,
@@ -26,10 +20,6 @@ var userSchema = new mongoose.Schema({
 
     twitterId: String,
 
-		// password: {
-		// 	type: String,
-		// 	// required: true
-		// },
 
 		teams: [{
 	        type: mongoose.Schema.Types.ObjectId,
@@ -67,7 +57,7 @@ userSchema.pre('save', function(next) {
 
 //TODO - remove players and teams from db when user is removed
 
-//Give schema a way to authenticate
+//Give schema a way to authenticate √
 
   
 
@@ -77,10 +67,8 @@ userSchema.methods.checkPassword = function(password, callback) {
   var user = this;
   bcrypt.compare(password, user.local.password, function (err, isMatch) {
     if (isMatch) {
-      console.log("EVERYTHING WORKED PERFECTLY!")
       callback(null, user);
     } else {
-      console.log("PASS DOES NOT MATCH")
       callback(err, null);
     }
   });
