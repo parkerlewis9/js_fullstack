@@ -3,14 +3,14 @@ $(document).ready(function() {
 	function lookUpPlayerStats(firstName, lastName, side, callback) {
 
 		$(".errorMsg").html("")
-		var url = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX&first_name=" + firstName + "&last_name=" + lastName;
+		var url = "https://probasketballapi.com/players?api_key=SoBO1Is4dA2cpkR0J9mlMgbftZv5wzNu&first_name=" + firstName + "&last_name=" + lastName;
 		//First request to get id:
 		$.post( url , function( data ) {
 		  var playerData = JSON.parse(data)
 	//If we get something back:
 		  if(playerData[0]) {
 		  	var player_id = playerData[0].player_id;
-		  	var newUrl = "https://probasketballapi.com/stats/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX&player_id=" + player_id;
+		  	var newUrl = "https://probasketballapi.com/stats/players?api_key=SoBO1Is4dA2cpkR0J9mlMgbftZv5wzNu&player_id=" + player_id;
 			//Request to get data:
 		  	$.post( newUrl , function( data ) {
 		   		 var playerStats = JSON.parse(data);
@@ -469,7 +469,7 @@ $(document).ready(function() {
 	var playerName = [];
 
 	//Get data for all of the names to display in autocomplete list
-	var urlTest = "https://probasketballapi.com/players?api_key=g1udvUO87qtohxB63HKLpVQkDZfS0ynX";
+	var urlTest = "https://probasketballapi.com/players?api_key=SoBO1Is4dA2cpkR0J9mlMgbftZv5wzNu";
 	$.post( urlTest , function( data ) {
 	  var playerData = JSON.parse(data)
 	  var splitArr = [];
